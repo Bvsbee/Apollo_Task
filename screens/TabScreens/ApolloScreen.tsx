@@ -6,31 +6,34 @@ import {
   ImageBackground,
 } from "react-native";
 import React from "react";
-import { Searchbar } from "react-native-paper";
-import { blue100 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import { useTheme } from "react-native-paper";
+import { CustomTheme } from "../../constants/themes";
 
 export default function ApolloScreen() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View>
-        <ImageBackground
-          source={require("../../assets//backgrounds/apollo.png")}
-        >
-          <View style={styles.inputField}></View>
-        </ImageBackground>
+        <View style={styles.inputField}></View>
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   inputField: {
+    width: "85%",
     position: "absolute",
     bottom: -500,
     alignItems: "center",
     backgroundColor: "blue",
     borderRadius: 20,
     borderColor: "#615EFC",
-    borderWidth: 54,
+  },
+  background: {
+    flex: 1,
+    resizeMode: "cover", // or "contain" for different scaling
   },
 });
