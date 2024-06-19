@@ -1,23 +1,18 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Navbar from "./Navbar";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Component from "react-native-paper/lib/typescript/components/Typography/Text";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import CustomizedHeader from "./CustomizedHeader";
 
 import { SettingsScreen } from "../screens/SettingsScreens";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const NativeStack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const SettingsScreens = [SettingsScreen];
-
-const screens = [
-  { name: "Navbar", component: Navbar },
-  ...SettingsScreens.map((component) => ({
-    name: component.name,
-    component,
-  })),
-];
+const screens = [{ name: "Navbar", component: Navbar }];
 
 export default function Navigator() {
   return (
@@ -33,3 +28,8 @@ export default function Navigator() {
     </NativeStack.Navigator>
   );
 }
+
+/* // ...SettingsScreens.map((component) => ({
+  name: component.name,
+  component,
+})), */

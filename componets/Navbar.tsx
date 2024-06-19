@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Platform } from "react-native";
+import { View, Platform, TouchableOpacity } from "react-native";
 import {
+  Entypo,
   FontAwesome,
   MaterialCommunityIcons,
   FontAwesome5,
@@ -16,6 +17,10 @@ import {
 } from "@react-navigation/bottom-tabs";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
+import CustomizedHeader from "./CustomizedHeader";
+import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { ParamListBase } from "@react-navigation/routers";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,9 +36,7 @@ const screenOptions: BottomTabNavigationOptions = {
   tabBarStyle: {
     backgroundColor: "white",
     borderColor: "#615EFC",
-    borderWidth: 2,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopWidth: 2,
   },
   headerStyle: {
     backgroundColor: "white",
@@ -45,12 +48,22 @@ const screenOptions: BottomTabNavigationOptions = {
 };
 
 export default function Navbar() {
+  const navigation = useNavigation<DrawerNavigationProp<ParamListBase>>();
+
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name="To Do"
         component={ToDoScreen}
         options={{
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.toggleDrawer()}
+              style={styles.menuButton}
+            >
+              <Entypo name="menu" size={24} />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -75,6 +88,14 @@ export default function Navbar() {
         name="ApolloAI"
         component={ApolloScreen}
         options={{
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.toggleDrawer()}
+              style={styles.menuButton}
+            >
+              <Entypo name="menu" size={24} />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -99,6 +120,14 @@ export default function Navbar() {
         name="Calender"
         component={CalenderScreen}
         options={{
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.toggleDrawer()}
+              style={styles.menuButton}
+            >
+              <Entypo name="menu" size={24} />
+            </TouchableOpacity>
+          ),
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -122,3 +151,10 @@ export default function Navbar() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  menuButton: {
+    paddingTop: 4,
+    marginLeft: 6,
+  },
+});
