@@ -10,7 +10,7 @@ import CombinedNavigator from "./componets/CombinedNavigator";
 export default function App() {
   return (
     <NavigationContainer>
-      <CombinedNavigator />
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }
