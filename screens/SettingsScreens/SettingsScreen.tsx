@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from "react-native";
+import React from "react";
+import CustomizedHeader from "../../componets/CustomizedHeader";
 
 export default function SettingsScreen() {
   return (
     <View>
-      <Text>Settings</Text>
+      <CustomizedHeader title="Settings" />
     </View>
-  )
+  );
 }

@@ -5,11 +5,12 @@ import CustomizedHeader from "./componets/CustomizedHeader";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
 import DrawerNavigator from "./componets/DrawerNavigator";
+import CombinedNavigator from "./componets/CombinedNavigator";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      <CombinedNavigator />
     </NavigationContainer>
   );
 }
