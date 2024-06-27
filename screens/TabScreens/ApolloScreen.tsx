@@ -6,14 +6,18 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import CustomizedHeader from "../../componets/CustomizedHeader";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function ApolloScreen() {
   const [placeholder, setPlaceholder] = React.useState(
     "Ask Apollo anything..."
   );
+
+  const [focus, setFocus] = useState(false);
 
   React.useEffect(() => {
     const placeholders = [
@@ -35,19 +39,25 @@ export default function ApolloScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <View style={{ flexDirection: "row", borderTopColor: "black" }}>
           <View style={styles.inputField}>
+            <TouchableOpacity onPress={() => setFocus(true)}>
+              <FontAwesome
+                name={focus ? "send" : "send-o"}
+                size={24}
+                color="black"
+              />
+            </TouchableOpacity>
             <TextInput
               placeholder={placeholder}
               style={styles.textInput}
             ></TextInput>
           </View>
-        </KeyboardAvoidingView>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -61,23 +71,25 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: Platform.OS === "ios" ? -730 : -760,
     alignItems: "center",
-
-    borderColor: "#615EFC",
+    borderTopColor: "grey",
+    flexDirection: "row-reverse",
+    borderTopWidth: 1,
   },
   background: {
+    borderColor: "blue",
     flex: 1,
     resizeMode: "cover", // or "contain" for different scaling
   },
   textInput: {
     height: 40,
-    borderColor: "grey",
+    borderColor: "black",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 20,
     paddingLeft: 10,
     margin: 10,
     backgroundColor: "#f0f0f0",
     color: "#333",
     fontSize: 16,
-    width: "100%",
+    width: "90%",
   },
 });
