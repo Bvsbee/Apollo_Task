@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export default function CombinedNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Draawer" component={DrawerNavigator} />
+      <Stack.Screen name="Drawer" component={DrawerNavigator} />
       <Stack.Screen name="Tab" component={Navbar} />
     </Stack.Navigator>
   );

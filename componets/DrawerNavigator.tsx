@@ -2,7 +2,11 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { SettingsScreen } from "../screens/SettingsScreens";
 import Navbar from "./Navbar";
-import { ApolloScreen, ToDoScreen } from "../screens/TabScreens";
+import {
+  ApolloScreen,
+  CalenderScreen,
+  ToDoScreen,
+} from "../screens/TabScreens";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { VirtualizedList } from "react-native";
@@ -16,19 +20,22 @@ export default function DrawerNavigator() {
       screenOptions={{
         headerStyle: {
           borderBottomColor: "black",
-          borderWidth: 2,
+          backgroundColor: "#f0f8ff",
+          borderWidth: 1,
+          borderColor: "#4a90e2",
         },
       }}
     >
       <Drawer.Screen
-        name="ApolloAI"
+        name="AquariusAI"
         component={ApolloScreen}
         options={({}) => ({
           headerRight: () => <TestFile />,
         })}
       />
-      <Drawer.Screen name="To-Do List" component={ToDoScreen} />
+      <Drawer.Screen name="To-Do List" component={ToDoScreen} options={{}} />
       <Drawer.Screen name="Settings" component={SettingsScreen} />
+      <Drawer.Screen name="Calender" component={CalenderScreen} />
     </Drawer.Navigator>
   );
 }

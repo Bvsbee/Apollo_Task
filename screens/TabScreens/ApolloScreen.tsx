@@ -11,6 +11,8 @@ import {
 import React, { useState } from "react";
 import CustomizedHeader from "../../componets/CustomizedHeader";
 import { FontAwesome } from "@expo/vector-icons";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function ApolloScreen() {
   const [placeholder, setPlaceholder] = React.useState(
@@ -38,27 +40,37 @@ export default function ApolloScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <View style={{ flexDirection: "row", borderTopColor: "black" }}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+    >
+      <TouchableWithoutFeedback>
+        <View style={styles.rowView}>
           <View style={styles.inputField}>
-            <TouchableOpacity onPress={() => setFocus(true)}>
-              <FontAwesome
-                name={focus ? "send" : "send-o"}
-                size={24}
-                color="black"
-              />
-            </TouchableOpacity>
-            <TextInput
-              placeholder={placeholder}
-              style={styles.textInput}
-            ></TextInput>
+            <LinearGradient
+              colors={["#7da8b3", "#4a90e2"]}
+              //colors={["#4b4b4b", "#000"]}
+              style={styles.sendButtonView}
+            >
+              <TouchableOpacity onPress={() => setFocus(true)}>
+                <FontAwesome
+                  name={focus ? "send" : "send-o"}
+                  size={24}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+            <View style={styles.inputView}>
+              <TextInput
+                placeholder={placeholder}
+                style={styles.textInput}
+              ></TextInput>
+            </View>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -66,30 +78,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  rowView: {
+    flexDirection: "row",
+    borderTopColor: "black",
+  },
   inputField: {
-    width: "99.1%",
+    width: "100%",
     position: "absolute",
     bottom: Platform.OS === "ios" ? -730 : -760,
     alignItems: "center",
-    borderTopColor: "grey",
+    borderTopColor: "#4b4b4b",
+
     flexDirection: "row-reverse",
-    borderTopWidth: 1,
   },
-  background: {
-    borderColor: "blue",
-    flex: 1,
-    resizeMode: "cover", // or "contain" for different scaling
+  sendButtonView: {
+    width: "10%",
+    borderRadius: 100,
+    paddingHorizontal: 6.5,
+    paddingVertical: 8,
+    marginRight: 6,
+  },
+
+  inputView: {
+    width: "90%",
   },
   textInput: {
     height: 40,
     borderColor: "black",
-    borderWidth: 1,
     borderRadius: 20,
     paddingLeft: 10,
     margin: 10,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#f0f8ff",
     color: "#333",
     fontSize: 16,
-    width: "90%",
+    width: "91%",
+    fontWeight: "bold",
   },
 });
