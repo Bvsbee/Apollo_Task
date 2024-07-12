@@ -9,7 +9,6 @@ import {
 } from "../screens/TabScreens";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { VirtualizedList } from "react-native";
 import TestFile from "./TestFile";
 
 const Drawer = createDrawerNavigator();
