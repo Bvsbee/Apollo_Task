@@ -14,6 +14,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { TouchableWithoutFeedback } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ApolloScreen() {
   const [placeholder, setPlaceholder] = React.useState(
@@ -74,15 +75,18 @@ export default function ApolloScreen() {
               />
             </TouchableOpacity>
           </LinearGradient>
-          <View style={styles.inputView}>
+          <ScrollView style={styles.inputView}>
             <TextInput
+              multiline={true}
+              textAlignVertical="top"
+              autoCorrect={true}
               placeholder={placeholder}
               style={styles.textInput}
               onFocus={() => setFocus(true)}
               onChangeText={(text) => setTyping(text.length > 0)}
               onBlur={() => setFocus(false)}
             ></TextInput>
-          </View>
+          </ScrollView>
         </View>
       </KeyboardAwareScrollView>
     </TouchableWithoutFeedback>
@@ -118,8 +122,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    //borderColor: "#4a90e2",
-    //borderWidth: 1,
+    borderColor: "#4a90e2",
+    borderWidth: 1,
     borderRadius: 20,
     paddingLeft: 10,
     margin: 10,
