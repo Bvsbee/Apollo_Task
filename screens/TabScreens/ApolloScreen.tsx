@@ -21,6 +21,7 @@ export default function ApolloScreen() {
     "Ask Apollo anything..."
   );
 
+  
   const [typing, setTyping] = useState(false);
   const [focus, setFocus] = useState(false);
 
@@ -78,8 +79,7 @@ export default function ApolloScreen() {
           <ScrollView style={styles.inputView}>
             <TextInput
               multiline={true}
-              textAlignVertical="top"
-              autoCorrect={true}
+               autoCorrect={true}
               placeholder={placeholder}
               style={styles.textInput}
               onFocus={() => setFocus(true)}

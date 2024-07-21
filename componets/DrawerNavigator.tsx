@@ -10,6 +10,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import TestFile from "./TestFile";
+import ToDoHeader from "./ToDoHeader";
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +33,13 @@ export default function DrawerNavigator() {
           headerRight: () => <TestFile />,
         })}
       />
-      <Drawer.Screen name="To-Do List" component={ToDoScreen} options={{}} />
+      <Drawer.Screen
+        name="To-Do List"
+        component={ToDoScreen}
+        options={({}) => ({
+          headerRight: () => <ToDoHeader />,
+        })}
+      />
       <Drawer.Screen name="Settings" component={SettingsScreen} />
       <Drawer.Screen name="Calender" component={CalenderScreen} />
     </Drawer.Navigator>
