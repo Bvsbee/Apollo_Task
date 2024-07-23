@@ -1,0 +1,23 @@
+<View style={styles.row}>
+      <View>
+        <LinearGradient
+          colors={["#66ccff", "#3399ff"]}
+          style={styles.linearGradient}
+        >
+          <TouchableOpacity>
+            <Text style={styles.buttonText}>New Task</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+
+      <View>
+        <LinearGradient
+          colors={["#ff9999", "#ff6666"]}
+          style={styles.linearGradient}
+        >
+          <TouchableOpacity>
+            <Text style={styles.buttonText}>Remove Task</Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+    </View>

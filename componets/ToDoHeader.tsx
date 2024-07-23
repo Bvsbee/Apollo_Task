@@ -5,47 +5,34 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function ToDoHeader() {
   return (
-    <View style={styles.row}>
-      <View>
-        <LinearGradient
-          colors={["#66ccff", "#3399ff"]}
-          style={styles.linearGradient}
-        >
-          <TouchableOpacity>
-            <Text style={styles.buttonText}>New Task</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-      </View>
-
-      <View>
-        <LinearGradient
-          colors={["#ff9999", "#ff6666"]}
-          style={styles.linearGradient}
-        >
-          <TouchableOpacity>
-            <Text style={styles.buttonText}>Remove Task</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-      </View>
+    <View style={styles.container}>
+      <LinearGradient
+        colors={["#7da8b3", "#4a90e2"]}
+        style={styles.gradientView}
+      >
+        <TouchableOpacity activeOpacity={0.8}>
+          <Text style={styles.sortingButtonText}>Organize Task</Text>
+        </TouchableOpacity>
+      </LinearGradient>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: "row", justifyContent: "center", padding: 10 },
-
-  TaskButton: {
-    borderWidth: 1,
-    borderRadius: 50,
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: "1%",
   },
-  buttonText: {
+  gradientView: {
+    borderRadius: 55,
+    paddingVertical: 9,
+    paddingHorizontal: 15,
+  },
+  sortingButtonText: {
     textAlign: "center",
     color: "#fff",
     fontSize: 12,
   },
-  linearGradient: {
-    borderRadius: 50,
-  },
-  removeContainer: {},
-  addContainer: {},
 });
