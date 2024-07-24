@@ -6,15 +6,29 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
+interface Task {
+  name: string;
+  priority: string;
+  dueDate: string;
+  descripition: string;
+  note: string;
+}
 
-const
-
-const TASK = [
-  {
-    header: "Task",
-    items: [{}],
-  },
-];
+class Task {
+  constructor(
+    name: string,
+    priority: string,
+    dueDate: string,
+    description: string,
+    note: string
+  ) {
+    this.name = name;
+    this.priority = priority;
+    this.dueDate = dueDate;
+    this.descripition = description;
+    this.note = note;
+  }
+}
 
 export default function TaskList() {
   return (
