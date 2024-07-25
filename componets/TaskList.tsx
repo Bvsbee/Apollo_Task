@@ -3,34 +3,23 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Task from "../classes/Task";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
-interface Task {
-  name: string;
-  priority: string;
-  dueDate: string;
-  descripition: string;
-  note: string;
-}
 
-class Task {
-  constructor(
-    name: string,
-    priority: string,
-    dueDate: string,
-    description: string,
-    note: string
-  ) {
-    this.name = name;
-    this.priority = priority;
-    this.dueDate = dueDate;
-    this.descripition = description;
-    this.note = note;
-  }
-}
+
 
 export default function TaskList() {
+
+  name: String;
+  priority: String;
+  dueDate: String;
+  desccription: String;
+  note: String;
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
