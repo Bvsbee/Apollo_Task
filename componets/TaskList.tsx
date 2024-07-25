@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import Task from "../classes/Task";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
@@ -18,6 +18,7 @@ export default function TaskList() {
   desccription: String;
   note: String;
 
+ 
 
 
   return (
@@ -34,6 +35,9 @@ export default function TaskList() {
           </View>
         </TouchableOpacity>
       </View>
+
+
+      
     </View>
   );
 }
