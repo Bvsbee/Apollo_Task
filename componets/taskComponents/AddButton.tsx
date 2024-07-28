@@ -77,7 +77,11 @@ export default function AddButton() {
                   transparent={true}
                   animationType="fade"
                 >
-                  <View style={styles.caldendarModalContainer}>
+                  <BlurView
+                    intensity={100}
+                    blurReductionFactor={4}
+                    style={styles.caldendarModalContainer}
+                  >
                     <Calendar
                       onDayPress={onDayPress}
                       markedDates={{
@@ -93,7 +97,7 @@ export default function AddButton() {
                       }}
                       toggleCalendar={calendarModalVisible}
                     />
-                  </View>
+                  </BlurView>
                 </Modal>
               </View>
               <View style={styles.inputRow}></View>
