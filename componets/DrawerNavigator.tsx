@@ -9,7 +9,7 @@ import {
 } from "../screens/TabScreens";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import TestFile from "./TestFile";
+import TestFile from "./taskComponents/TestFile";
 import ToDoHeader from "./ToDoHeader";
 
 const Drawer = createDrawerNavigator();
