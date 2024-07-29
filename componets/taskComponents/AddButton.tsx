@@ -1,4 +1,11 @@
-import { View, Text, TouchableOpacity, StyleSheet, Modal } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Modal,
+  Alert,
+} from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
@@ -12,6 +19,8 @@ export default function AddButton() {
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
+  const [taskName, setTaskName] = useState("");
+  const [description, setDescription] = useState("");
 
   const onDayPress = (day: any) => {
     setSelectedDate(day.dateString);
@@ -23,17 +32,47 @@ export default function AddButton() {
   };
 
   const toggleModal = () => {
-    setModalVisible(true);
+    setModalVisible(!modalVisible);
+  };
+
+  const errorHandling = () => {
+    if (!selectedDate) {
+      Alert.alert("Incomplete Field", "Please select a date");
+      return false;
+    }
+    if (!selectedValue) {
+      Alert.alert("Incomplete Field", "Please select a task priority");
+      return false;
+    }
+    if (!taskName) {
+      Alert.alert("Incomplete Field", "Please enter a task name");
+      return false;
+    }
+
+    return true;
+  };
+
+  const createTask = () => {
+    if (!errorHandling()) return;
+
+    setTaskName("");
+    setSelectedValue(null);
+    setSelectedDate("");
+    setDescription("");
+
+    toggleModal();
   };
 
   return (
     <View>
+      {/* //Make Modal Appear Button View */}
       <TouchableOpacity onPress={toggleModal}>
         <View style={styles.addIcon}>
           <Ionicons name="add-circle-sharp" size={35} color="#4a90e2" />
         </View>
       </TouchableOpacity>
 
+      {/* //Create Task Modal View */}
       <Modal visible={modalVisible} transparent={true} animationType="slide">
         <BlurView
           intensity={50}
@@ -41,14 +80,22 @@ export default function AddButton() {
           style={styles.modalContainer}
         >
           <View style={styles.modalContent}>
-            <Text style={styles.headerText}>Task Creation!</Text>
+            {/* //Create Task Header */}
+            <Text style={styles.headerText}>Create A New Task</Text>
 
             <View style={styles.textInputContainer}>
+              {/* //Task Name  View */}
               <View style={styles.inputRow}>
                 <Text style={styles.label}>Task Name:</Text>
-                <TextInput style={styles.textInput}></TextInput>
+                <TextInput
+                  placeholder="Enter Task Name"
+                  style={styles.textInput}
+                  value={taskName}
+                  onChangeText={setTaskName}
+                ></TextInput>
               </View>
 
+              {/* //Task Priority  View */}
               <View style={styles.inputRow}>
                 <Text style={styles.label}>Task Priority: </Text>
                 <Picker
@@ -62,6 +109,8 @@ export default function AddButton() {
                   <Picker.Item label="Low" value="low" />
                 </Picker>
               </View>
+
+              {/* //Due Date View */}
               <View style={styles.inputRow}>
                 <Text style={styles.label}>Due Date:</Text>
                 <TouchableOpacity onPress={toggleCalendar}>
@@ -100,21 +149,25 @@ export default function AddButton() {
                   </BlurView>
                 </Modal>
               </View>
-              <View style={styles.inputRow}></View>
+
+              {/* //Description View */}
               <View style={styles.inputRow}>
                 <Text style={styles.label}>Description: </Text>
-                <TextInput style={styles.textInput}></TextInput>
+                <TextInput style={styles.descriptionInput}></TextInput>
               </View>
             </View>
+
+            {/* //Close Button View */}
             <View>
               <Ionicons
                 name="close"
                 style={styles.closeButton}
-                size={24}
+                size={26}
                 onPress={() => setModalVisible(false)}
               />
             </View>
 
+            {/* //Create Task Button View */}
             <LinearGradient
               colors={["#4a90e2", "#34a0a4"]} // Linear gradient colors
               start={{ x: 0, y: 0 }}
@@ -123,7 +176,7 @@ export default function AddButton() {
             >
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => setModalVisible(false)}
+                onPressIn={() => createTask()}
               >
                 <Text style={styles.createTaskButtonText}>Create Task!</Text>
               </TouchableOpacity>
@@ -181,6 +234,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     padding: 2,
   },
+  descriptionInput: {
+    flex: 1,
+    borderRadius: 5,
+    backgroundColor: "#fff5ee", //SeaShell
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+    marginLeft: 10,
+    padding: 2,
+  },
   pickerInput: {
     flex: 1,
     borderRadius: 5,
@@ -197,12 +262,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: "-3%",
     top: -333,
+    backgroundColor: "#e74c3c",
+    borderRadius: 50,
   },
   header: {},
   headerText: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 25,
   },
   label: {
     fontSize: 18,
