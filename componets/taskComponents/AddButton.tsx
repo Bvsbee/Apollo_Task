@@ -13,8 +13,13 @@ import { TextInput } from "react-native-gesture-handler";
 import { Picker } from "@react-native-picker/picker";
 import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
+import Task from "../../classes/Task";
 
-export default function AddButton() {
+interface AddButtonProps {
+  addTask: (task: Task) => void;
+}
+
+export default function AddButton({ addTask }: AddButtonProps) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
@@ -54,6 +59,15 @@ export default function AddButton() {
 
   const createTask = () => {
     if (!errorHandling()) return;
+
+    const newTask = new Task(
+      taskName,
+      selectedValue!,
+      selectedDate,
+      description,
+      "",
+      false
+    );
 
     setTaskName("");
     setSelectedValue(null);

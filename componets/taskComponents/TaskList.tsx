@@ -9,11 +9,17 @@ import RemoveButton from "./RemoveButton";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
+const [tasks, setTask] = useState<Task[]>([]);
+
+const addTask=(newTask: Task) => {
+  setTask((prevTask) => [...prevTask,newTask])
+}
+
 export default function TaskList() {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <AddButton />
+        <AddButton addTask={addTask} />
         <RemoveButton />
       </View>
     </View>
