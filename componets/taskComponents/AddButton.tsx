@@ -15,11 +15,7 @@ import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
-interface AddButtonProps {
-  addTask: (task: Task) => void;
-}
-
-export default function AddButton({ addTask }: AddButtonProps) {
+export default function AddButton() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");

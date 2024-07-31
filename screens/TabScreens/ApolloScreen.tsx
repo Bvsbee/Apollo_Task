@@ -21,7 +21,6 @@ export default function ApolloScreen() {
     "Ask Apollo anything..."
   );
 
-  
   const [typing, setTyping] = useState(false);
   const [focus, setFocus] = useState(false);
 
@@ -46,50 +45,52 @@ export default function ApolloScreen() {
   }, [typing]);
 
   return (
-    <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
-      <KeyboardAwareScrollView
-        contentContainerStyle={styles.container}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={false}
-      >
-        {/* Middle of the page */}
-        {/* <LinearGradient
+    <SafeAreaView style={styles.container}>
+      <TouchableWithoutFeedback accessible={false} onPress={Keyboard.dismiss}>
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.container}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={false}
+        >
+          {/* Middle of the page */}
+          {/* <LinearGradient
           colors={["#cce7ff", "#e6f7ff"]}
           style={styles.content}
         ></LinearGradient>
        */}
 
-        <View style={styles.content}></View>
+          <View style={styles.content}></View>
 
-        {/* Bottom of the page */}
-        <View style={styles.inputField}>
-          <LinearGradient
-            colors={["#7da8b3", "#4a90e2"]}
-            //colors={["#4b4b4b", "#000"]}
-            style={styles.sendButtonView}
-          >
-            <TouchableOpacity onPress={() => setFocus(true)}>
-              <FontAwesome
-                name={focus ? "send" : "send-o"}
-                size={24}
-                color="white"
-              />
-            </TouchableOpacity>
-          </LinearGradient>
-          <ScrollView style={styles.inputView}>
-            <TextInput
-              multiline={true}
-               autoCorrect={true}
-              placeholder={placeholder}
-              style={styles.textInput}
-              onFocus={() => setFocus(true)}
-              onChangeText={(text) => setTyping(text.length > 0)}
-              onBlur={() => setFocus(false)}
-            ></TextInput>
-          </ScrollView>
-        </View>
-      </KeyboardAwareScrollView>
-    </TouchableWithoutFeedback>
+          {/* Bottom of the page */}
+          <View style={styles.inputField}>
+            <LinearGradient
+              colors={["#7da8b3", "#4a90e2"]}
+              //colors={["#4b4b4b", "#000"]}
+              style={styles.sendButtonView}
+            >
+              <TouchableOpacity onPress={() => setFocus(true)}>
+                <FontAwesome
+                  name={focus ? "send" : "send-o"}
+                  size={24}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </LinearGradient>
+            <ScrollView style={styles.inputView}>
+              <TextInput
+                multiline={true}
+                autoCorrect={true}
+                placeholder={placeholder}
+                style={styles.textInput}
+                onFocus={() => setFocus(true)}
+                onChangeText={(text) => setTyping(text.length > 0)}
+                onBlur={() => setFocus(false)}
+              ></TextInput>
+            </ScrollView>
+          </View>
+        </KeyboardAwareScrollView>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 }
 
