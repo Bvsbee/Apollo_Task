@@ -17,7 +17,7 @@ import {
 } from "@react-navigation/bottom-tabs";
 import { BlurView } from "expo-blur";
 import { StyleSheet } from "react-native";
-import CustomizedHeader from "./CustomizedHeader";
+import CustomizedHeader from "./drawerComponents/CustomizedHeader";
 import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { ParamListBase } from "@react-navigation/routers";

@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import Navigator from "./componets/Navigator";
-import CustomizedHeader from "./componets/CustomizedHeader";
+import CustomizedHeader from "./componets/drawerComponents/CustomizedHeader";
 import "react-native-reanimated";
 import "react-native-gesture-handler";
-import DrawerNavigator from "./componets/DrawerNavigator";
+import DrawerNavigator from "./componets/drawerComponents/DrawerNavigator";
 import CombinedNavigator from "./componets/CombinedNavigator";
 
 export default function App() {

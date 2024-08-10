@@ -10,6 +10,8 @@ import TaskDisplay from "./TaskDisplay";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
+
+
 export default function TaskList() {
   return (
     <SafeAreaView style={styles.container}>

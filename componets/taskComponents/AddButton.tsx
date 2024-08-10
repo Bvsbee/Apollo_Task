@@ -16,6 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
 export default function AddButton() {
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");

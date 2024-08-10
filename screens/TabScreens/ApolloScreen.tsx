@@ -9,7 +9,7 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState } from "react";
-import CustomizedHeader from "../../componets/CustomizedHeader";
+import CustomizedHeader from "../../componets/drawerComponents/CustomizedHeader";
 import { FontAwesome } from "@expo/vector-icons";
 import { TouchableWithoutFeedback } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";

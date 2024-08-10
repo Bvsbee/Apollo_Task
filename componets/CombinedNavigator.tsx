@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Navbar from "./Navbar";
-import DrawerNavigator from "./DrawerNavigator";
+import DrawerNavigator from "./drawerComponents/DrawerNavigator";
 import { ApolloScreen } from "../screens/TabScreens";
 
 const Stack = createStackNavigator();

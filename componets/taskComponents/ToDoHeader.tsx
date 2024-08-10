@@ -10,7 +10,7 @@ export default function ToDoHeader() {
         colors={["#7da8b3", "#4a90e2"]}
         style={styles.gradientView}
       >
-        <TouchableOpacity activeOpacity={0.8}>
+        <TouchableOpacity activeOpacity={0.8} >
           <Text style={styles.sortingButtonText}>Organize Task</Text>
         </TouchableOpacity>
       </LinearGradient>
