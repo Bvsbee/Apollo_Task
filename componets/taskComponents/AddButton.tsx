@@ -15,7 +15,7 @@ import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
-export default function AddButton() {
+export default function AddButton({createNewTask}: {createNewTask: (task: Task)=> void}) {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
@@ -72,6 +72,8 @@ export default function AddButton() {
     setDescription("");
 
     toggleModal();
+
+    createNewTask(newTask)
   };
 
   return (

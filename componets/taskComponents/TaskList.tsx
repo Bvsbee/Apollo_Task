@@ -10,19 +10,21 @@ import TaskDisplay from "./TaskDisplay";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
-
-
 export default function TaskList() {
+  const [tasks, setTask] = useState<Task[]>([]);
+
+  const createNewTask = (task: Task) => {
+    setTask([...tasks, task]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.row}>
-        <AddButton />
+        <AddButton createNewTask={createNewTask} />
         <RemoveButton />
       </View>
 
-      <View>
-        <TaskDisplay />
-      </View>
+      <TaskDisplay tasks={tasks} />
     </SafeAreaView>
   );
 }
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     right: 30,
+    bottom: 30,
   },
   addIcon: {},
   removeIcon: {},
