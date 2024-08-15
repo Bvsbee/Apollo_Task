@@ -12,19 +12,32 @@ import TaskDisplay from "./TaskDisplay";
 
 export default function TaskList() {
   const [tasks, setTask] = useState<Task[]>([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const createNewTask = (task: Task) => {
     setTask([...tasks, task]);
   };
 
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.row}>
-        <AddButton createNewTask={createNewTask} />
-        <RemoveButton />
+        <AddButton
+          createNewTask={createNewTask}
+          toggleModal={toggleModal}
+          modalVisible={modalVisible}
+        />
       </View>
-
-      <TaskDisplay tasks={tasks} />
+      <View style={styles.displayList}>
+        <TaskDisplay
+          tasks={tasks}
+          createNewTask={createNewTask}
+          toggleModal={toggleModal}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -42,4 +55,5 @@ const styles = StyleSheet.create({
   },
   addIcon: {},
   removeIcon: {},
+  displayList: { position: "absolute", width: "100%" },
 });
