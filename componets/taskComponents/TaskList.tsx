@@ -31,7 +31,7 @@ export default function TaskList() {
           modalVisible={modalVisible}
         />
       </View>
-      <View style={styles.displayList}>
+      <View>
         <TaskDisplay
           tasks={tasks}
           createNewTask={createNewTask}
@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
   },
   addIcon: {},
   removeIcon: {},
-  displayList: { position: "absolute", width: "100%" },
+  displayList: {},
 });

@@ -11,7 +11,7 @@ export default function TaskDisplay({
 }: {
   tasks: Task[];
   createNewTask: (task: Task) => void;
-  toggleModal: () =>
+  toggleModal: () => void;
 }) {
   const dispalyTask = ({ item }: { item: Task }) => (
     <View style={styles.taskItem}>
@@ -33,7 +33,7 @@ export default function TaskDisplay({
   return (
     <SafeAreaView style={styles.container}>
       {tasks.length === 0 ? (
-        <TouchableOpacity activeOpacity={0.8} onPressIn={() => createNewTask()}>
+        <TouchableOpacity activeOpacity={0.8} onPress={toggleModal}>
           <LinearGradient
             colors={["#7da8b3", "#4a90e2"]}
             style={styles.gradientView}

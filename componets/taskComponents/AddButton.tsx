@@ -15,9 +15,15 @@ import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
-export default function AddButton({createNewTask, }: {createNewTask: (task: Task)=> void  }) {
-  
-  const [modalVisible, setModalVisible] = useState(false);
+export default function AddButton({
+  createNewTask,
+  toggleModal,
+  modalVisible,
+}: {
+  createNewTask: (task: Task) => void;
+  toggleModal: () => void;
+  modalVisible: boolean;
+}) {
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
@@ -31,10 +37,6 @@ export default function AddButton({createNewTask, }: {createNewTask: (task: Task
 
   const toggleCalendar = () => {
     setCalendarModalVisible(true);
-  };
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
   };
 
   const errorHandling = () => {
@@ -73,7 +75,7 @@ export default function AddButton({createNewTask, }: {createNewTask: (task: Task
 
     toggleModal();
 
-    createNewTask(newTask)
+    createNewTask(newTask);
   };
 
   return (
@@ -176,7 +178,7 @@ export default function AddButton({createNewTask, }: {createNewTask: (task: Task
                 name="close"
                 style={styles.closeButton}
                 size={26}
-                onPress={() => setModalVisible(false)}
+                onPress={toggleModal}
               />
             </View>
 
