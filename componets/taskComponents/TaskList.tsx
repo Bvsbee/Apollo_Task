@@ -7,12 +7,15 @@ import Task from "../../classes/Task";
 import AddButton from "./AddButton";
 import RemoveButton from "./RemoveButton";
 import TaskDisplay from "./TaskDisplay";
+import CreateTaskModal from "../modals/CreateTaskModal";
+import OrganizeTaskModal from "../modals/OrganizeTaskModal";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
 export default function TaskList() {
   const [tasks, setTask] = useState<Task[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [organizeModalVisible, setOrganizeModalVisible] = useState(false);
 
   const createNewTask = (task: Task) => {
     setTask([...tasks, task]);
@@ -22,22 +25,35 @@ export default function TaskList() {
     setModalVisible(!modalVisible);
   };
 
+  const toggleOrganizeModal = () => {
+    setModalVisible(!organizeModalVisible);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.row}>
+      <View style={styles.addButton}>
         <AddButton
-          createNewTask={createNewTask}
-          toggleModal={toggleModal}
-          modalVisible={modalVisible}
-        />
-      </View>
-      <View>
-        <TaskDisplay
           tasks={tasks}
           createNewTask={createNewTask}
           toggleModal={toggleModal}
         />
       </View>
+
+      <View style={styles.displayList}>
+        <TaskDisplay tasks={tasks} />
+      </View>
+
+      <CreateTaskModal
+        createNewTask={createNewTask}
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+      />
+
+      {/*  <OrganizeTaskModal
+        tasks={tasks}
+        oraginzeModalVisible={organizeModalVisible}
+        toggleOrganizeModal={toggleOrganizeModal}
+      /> */}
     </SafeAreaView>
   );
 }
@@ -46,14 +62,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  row: {
-    flexDirection: "row",
-    position: "absolute",
-    alignItems: "center",
-    right: 30,
-    bottom: 30,
-  },
-  addIcon: {},
-  removeIcon: {},
-  displayList: {},
+  addButton: { flex: 1 },
+  displayList: { flex: 1 },
 });
