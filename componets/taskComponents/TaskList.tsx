@@ -59,9 +59,17 @@ export default function TaskList() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { flex: 1 },
+  addButton: {
     flex: 1,
+    position: "absolute",
+    justifyContent: "center",
+   
   },
-  addButton: { flex: 1 },
-  displayList: { flex: 1 },
+  displayList: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: "50%",
+  },
 });

@@ -8,10 +8,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
-import { TextInput } from "react-native-gesture-handler";
-import { Picker } from "@react-native-picker/picker";
-import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
@@ -56,10 +52,16 @@ export default function AddButton({
 }
 
 const styles = StyleSheet.create({
-  gradient: { padding: 15, borderRadius: 10 },
+  gradient: {
+    padding: 15,
+    borderRadius: 100,
+  },
   placeHolderView: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+    top: "685%",
+    left: "21.5%",
   },
   placeHolderText: { color: "#fff", fontSize: 16, textAlign: "center" },
   addIcon: {},
