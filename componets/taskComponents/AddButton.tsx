@@ -41,10 +41,8 @@ export default function AddButton({
           </TouchableOpacity>
         </View>
       ) : (
-        <TouchableOpacity onPressIn={toggleModal}>
-          <View style={styles.addIcon}>
-            <Ionicons name="add-circle-sharp" size={35} color="#4a90e2" />
-          </View>
+        <TouchableOpacity onPressIn={toggleModal} style={styles.addIcon}>
+          <Ionicons name="add-circle-sharp" size={45} color="#4a90e2" />
         </TouchableOpacity>
       )}
     </View>
@@ -52,6 +50,7 @@ export default function AddButton({
 }
 
 const styles = StyleSheet.create({
+  container: { position: "relative" },
   gradient: {
     padding: 15,
     borderRadius: 100,
@@ -64,5 +63,5 @@ const styles = StyleSheet.create({
     left: "21.5%",
   },
   placeHolderText: { color: "#fff", fontSize: 16, textAlign: "center" },
-  addIcon: {},
+  addIcon: { position: "absolute", top: 700, left: 330, zIndex: 1000 },
 });

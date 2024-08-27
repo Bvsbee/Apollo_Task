@@ -64,12 +64,11 @@ const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     justifyContent: "center",
-   
   },
   displayList: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    bottom: "50%",
+
+    width: "100%",
   },
 });

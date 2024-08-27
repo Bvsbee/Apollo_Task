@@ -111,9 +111,9 @@ export default function CreateTaskModal({
                 selectedValue={selectedValue}
               >
                 <Picker.Item label="Select a priority.." value={null} />
-                <Picker.Item label="High" value="high" />
-                <Picker.Item label="Medium" value="medium" />
-                <Picker.Item label="Low" value="low" />
+                <Picker.Item label="High" value="High" />
+                <Picker.Item label="Medium" value="Medium" />
+                <Picker.Item label="Low" value="Low" />
               </Picker>
             </View>
 
