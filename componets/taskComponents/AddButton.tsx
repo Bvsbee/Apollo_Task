@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 
+
 export default function AddButton({
   tasks,
   createNewTask,

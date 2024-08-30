@@ -10,11 +10,12 @@ import React from "react";
 import { useState } from "react";
 import { BlurView } from "expo-blur";
 import { TextInput } from "react-native-gesture-handler";
-import { Picker } from "@react-native-picker/picker";
+
 import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 import { Ionicons } from "@expo/vector-icons";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export default function CreateTaskModal({
   modalVisible,
@@ -31,6 +32,14 @@ export default function CreateTaskModal({
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
 
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [value, setValue] = useState<string | null>(null);
+  const [items, setItems] = useState([
+    { label: "High", value: "High" },
+    { label: "Medium", value: "Medium" },
+    { label: "Low", value: "Low" },
+  ]);
+
   const onDayPress = (day: any) => {
     setSelectedDate(day.dateString);
     setCalendarModalVisible(false);
@@ -45,7 +54,7 @@ export default function CreateTaskModal({
       Alert.alert("Incomplete Field", "Please select a date");
       return false;
     }
-    if (!selectedValue) {
+    if (!setValue) {
       Alert.alert("Incomplete Field", "Please select a task priority");
       return false;
     }
@@ -62,7 +71,7 @@ export default function CreateTaskModal({
 
     const newTask = new Task(
       taskName,
-      selectedValue!,
+      value!,
       selectedDate,
       description,
       "",
@@ -70,7 +79,7 @@ export default function CreateTaskModal({
     );
 
     setTaskName("");
-    setSelectedValue(null);
+    setValue(null);
     setSelectedDate("");
     setDescription("");
 
@@ -105,7 +114,18 @@ export default function CreateTaskModal({
             {/* //Task Priority  View */}
             <View style={styles.inputRow}>
               <Text style={styles.label}>Task Priority: </Text>
-              <Picker
+              <DropDownPicker
+                open={menuVisible}
+                value={value}
+                items={items}
+                setItems={setItems}
+                setOpen={setMenuVisible}
+                setValue={setValue}
+                placeholder="Select a priority..."
+                style={styles.dropDown}
+                dropDownContainerStyle={styles.dropDownContainer}
+              />
+              {/* <Picker
                 style={styles.pickerInput}
                 onValueChange={setSelectedValue}
                 selectedValue={selectedValue}
@@ -114,7 +134,7 @@ export default function CreateTaskModal({
                 <Picker.Item label="High" value="High" />
                 <Picker.Item label="Medium" value="Medium" />
                 <Picker.Item label="Low" value="Low" />
-              </Picker>
+              </Picker> */}
             </View>
 
             {/* //Due Date View */}
@@ -122,7 +142,7 @@ export default function CreateTaskModal({
               <Text style={styles.label}>Due Date:</Text>
               <TouchableOpacity onPress={toggleCalendar}>
                 <TextInput
-                  style={styles.textInput}
+                  style={styles.dueDateTextInput}
                   value={selectedDate}
                   placeholder="Choose Due-Date"
                   editable={false}
@@ -163,20 +183,19 @@ export default function CreateTaskModal({
               <TextInput
                 style={styles.descriptionInput}
                 value={description}
+                placeholder="Enter A Description"
                 onChangeText={setDescription}
               ></TextInput>
             </View>
           </View>
 
           {/* //Close Button View */}
-          <View>
-            <Ionicons
-              name="close"
-              style={styles.closeButton}
-              size={26}
-              onPress={toggleModal}
-            />
-          </View>
+          <Ionicons
+            name="close"
+            style={styles.closeButton}
+            size={26}
+            onPress={toggleModal}
+          />
 
           {/* //Create Task Button View */}
           <LinearGradient
@@ -233,29 +252,44 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: 25,
   },
-  textInput: {
-    flex: 1,
-    borderRadius: 5,
-    backgroundColor: "#fff5ee", //SeaShell
+  dueDateTextInput: {
+    width: 210,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: "#fff", //White
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
     marginLeft: 10,
-    padding: 2,
+  },
+  textInput: {
+    flex: 1,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: "#fff", //White
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+    marginLeft: 10,
   },
   descriptionInput: {
     flex: 1,
-    borderRadius: 5,
-    backgroundColor: "#fff5ee", //SeaShell
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: "#fff", //White
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
     marginLeft: 10,
-    padding: 2,
   },
   pickerInput: {
     flex: 1,
@@ -271,10 +305,10 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    right: "-3%",
-    top: -333,
+    right: "3%",
     backgroundColor: "#e74c3c",
     borderRadius: 50,
+    marginTop: 4,
   },
   header: {},
   headerText: {
@@ -303,5 +337,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  addIcon: {},
+  dropDown: {
+    width: 195,
+    backgroundColor: "#fff",
+    left: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  dropDownContainer: {
+    width: 195,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
 });

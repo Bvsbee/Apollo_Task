@@ -4,19 +4,21 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 import { BlurView } from "expo-blur";
-
+import DropDownPicker from "react-native-dropdown-picker";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Name", value: "name" },
+    { label: "Priority", value: "priority" },
+    { label: "Due Date", value: "date" },
+  ]);
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
-  };
-
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
   };
 
   return (
@@ -34,7 +36,19 @@ export default function ToDoHeader() {
         <BlurView intensity={100} style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.headerText}>Organization Options</Text>
-            <Text style={styles.contentText}>Sort & Filter:</Text>
+
+            <DropDownPicker
+              open={menuVisible}
+              value={value}
+              items={items}
+              setOpen={setMenuVisible}
+              setValue={setValue}
+              setItems={setItems}
+              placeholder="Sort By..."
+              style={styles.dropDownPicker}
+              dropDownContainerStyle={styles.dropDownContainer}
+              placeholderStyle={styles.placeHolder}
+            />
 
             <Ionicons
               name="close"
@@ -103,4 +117,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#e74c3c",
     borderRadius: 50,
   },
+  dropDownPicker: {
+    marginTop: 15,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+  },
+  dropDownContainer: {
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  placeHolder: { fontWeight: "bold" },
+  label: {},
 });

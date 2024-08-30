@@ -28,13 +28,13 @@ export default function DrawerNavigator() {
         },
       }}
     >
-      <Drawer.Screen
+      {/*  <Drawer.Screen
         name="AquariusAI"
         component={ApolloScreen}
         options={({}) => ({
           headerRight: () => <TestFile />,
         })}
-      />
+      /> */}
       <Drawer.Screen
         name="To-Do List"
         component={ToDoScreen}
