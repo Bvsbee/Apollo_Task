@@ -4,7 +4,7 @@ export default class Task {
   dueDate: string;
   description: string;
   note: string;
-  completedTask: boolean;
+  isCompleted: boolean;
 
   constructor(
     name: string,
@@ -12,14 +12,14 @@ export default class Task {
     dueDate: string,
     description: string,
     note: string,
-    completedTask: boolean
+    isCompleted: boolean
   ) {
     this.name = name;
     this.priority = priority;
     this.dueDate = dueDate;
     this.description = description;
     this.note = note;
-    this.completedTask = completedTask;
+    this.isCompleted = isCompleted;
   }
 
   getName(): string {
@@ -59,6 +59,6 @@ export default class Task {
   }
 
   taskCompleted(): boolean {
-    return this.completedTask;
+    return this.isCompleted;
   }
 }

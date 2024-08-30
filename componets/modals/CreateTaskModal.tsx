@@ -136,7 +136,7 @@ export default function CreateTaskModal({
                 <BlurView
                   intensity={100}
                   blurReductionFactor={4}
-                  style={styles.caldendarModalContainer}
+                  style={styles.calendarModalContainer}
                 >
                   <Calendar
                     onDayPress={onDayPress}
@@ -160,7 +160,11 @@ export default function CreateTaskModal({
             {/* //Description View */}
             <View style={styles.inputRow}>
               <Text style={styles.label}>Description: </Text>
-              <TextInput style={styles.descriptionInput}></TextInput>
+              <TextInput
+                style={styles.descriptionInput}
+                value={description}
+                onChangeText={setDescription}
+              ></TextInput>
             </View>
           </View>
 
@@ -201,8 +205,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  caldendarModalContainer: {
+  calendarModalContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

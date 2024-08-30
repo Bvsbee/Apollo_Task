@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     top: "685%",
     left: "21.5%",
+    position: "relative",
   },
   placeHolderText: { color: "#fff", fontSize: 16, textAlign: "center" },
   addIcon: { position: "absolute", top: 700, left: 330, zIndex: 1000 },

@@ -8,7 +8,7 @@ import AddButton from "./AddButton";
 import RemoveButton from "./RemoveButton";
 import TaskDisplay from "./TaskDisplay";
 import CreateTaskModal from "../modals/CreateTaskModal";
-import OrganizeTaskModal from "../modals/OrganizeTaskModal";
+import ToDoHeader from "../screenHeaders/ToDoHeader";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
@@ -26,7 +26,7 @@ export default function TaskList() {
   };
 
   const toggleOrganizeModal = () => {
-    setModalVisible(!organizeModalVisible);
+    setOrganizeModalVisible(!organizeModalVisible);
   };
 
   return (
@@ -48,12 +48,6 @@ export default function TaskList() {
         modalVisible={modalVisible}
         toggleModal={toggleModal}
       />
-
-      {/*  <OrganizeTaskModal
-        tasks={tasks}
-        oraginzeModalVisible={organizeModalVisible}
-        toggleOrganizeModal={toggleOrganizeModal}
-      /> */}
     </SafeAreaView>
   );
 }

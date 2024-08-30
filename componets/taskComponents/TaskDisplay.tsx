@@ -7,7 +7,12 @@ import AddButton from "./AddButton";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
   const dispalyTask = ({ item }: { item: Task }) => (
-    <View style={styles.taskItem}>
+    <View
+      style={[
+        styles.taskItem,
+        { borderEndColor: item.isCompleted ? "#228B22" : "#DC143C" },
+      ]} /* Forest Green ? Crimson Red. Conditonally Rendinger*/
+    >
       <View>
         <Text style={styles.taskText}>Task Name: {item.name}</Text>
       </View>
@@ -49,6 +54,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   gradient: { padding: 15, borderRadius: 10 },
+  gradientBorder: {
+    borderRadius: 10,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    padding: 1,
+  },
   placeHolderView: {
     flex: 1,
     justifyContent: "center",
@@ -65,10 +76,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     padding: 20,
-    backgroundColor: "#fff",
-    borderEndWidth: 5,
+    backgroundColor: "#F0F8FF", //Alice Bl
+    borderEndWidth: 6,
     borderTopEndRadius: 10,
-    borderEndColor: "red",
+    borderEndColor: "#228B22", // Crimson Red
     borderColor: "#4a90e2",
     marginVertical: 10,
     marginHorizontal: 15,
@@ -80,6 +91,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 5,
+    position: "relative",
   },
   displayList: { flex: 1, width: "100%", paddingHorizontal: 10 },
 });
