@@ -21,3 +21,59 @@
         </LinearGradient>
       </View>
     </View>
+
+
+
+ <View style={styles.tabContainer}>
+              <TouchableOpacity onPress={() => setActiveSection("sort")}>
+                <Text
+                  style={
+                    activeSection === "sort" ? styles.activeTab : styles.tab
+                  }
+                >
+                  Sort
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setActiveSection("filter")}>
+                <Text
+                  style={
+                    activeSection === "filter" ? styles.activeTab : styles.tab
+                  }
+                >
+                  Filter
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+            const renderSection = () => {
+    switch (activeSection) {
+      case "sort":
+        return <Text>Sorting Options</Text>;
+      case "filter":
+        return <Text>Filtering Options</Text>;
+        deafault: return null;
+    }
+  };
+
+
+const [menuVisible, setMenuVisible] = useState(false);
+const [value, setValue] = useState(null);
+ const [items, setItems] = useState([
+    { label: "Name", value: "name" },
+    { label: "Priority", value: "priority" },
+    { label: "Due Date", value: "date" },
+  ]);
+
+
+ <DropDownPicker
+            open={menuVisible}
+            value={value}
+            items={items}
+            setOpen={setMenuVisible}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Sort By..."
+            style={styles.dropDownPicker}
+            dropDownContainerStyle={styles.dropDownContainer}
+            placeholderStyle={styles.placeHolder}
+          />

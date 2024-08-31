@@ -10,7 +10,6 @@ import React from "react";
 import { useState } from "react";
 import { BlurView } from "expo-blur";
 import { TextInput } from "react-native-gesture-handler";
-
 import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";

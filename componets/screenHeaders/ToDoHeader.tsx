@@ -1,21 +1,101 @@
-import { View, Text, StyleSheet, Modal } from "react-native";
+// React and React Native core imports
 import React, { useState } from "react";
+import { View, Text, StyleSheet, Modal } from "react-native";
+
+// Third-party libraries
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
-import Task from "../../classes/Task";
 import { BlurView } from "expo-blur";
+import Accordion from "react-native-collapsible/Accordion";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Ionicons } from "@expo/vector-icons";
+import { Checkbox } from "react-native-paper";
+
+// Internal project modules
+import Task from "../../classes/Task";
+import { RotateInDownLeft } from "react-native-reanimated";
+
+interface AccordionProps {
+  section: any;
+  unUsedIndex: number;
+  isActive: boolean;
+}
+
+const SECTIONS = [
+  {
+    title: "Sorting",
+  },
+  {
+    title: "Filtering",
+  },
+];
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [value, setValue] = useState(null);
+  const [activeSections, setActiveSection] = useState<number[]>([]);
+  const [checked, setChecked] = useState(false);
+
   const [items, setItems] = useState([
     { label: "Name", value: "name" },
     { label: "Priority", value: "priority" },
     { label: "Due Date", value: "date" },
   ]);
+
+  const renderHeader = (
+    section: any,
+    unUsedIndex: number,
+    isActive: boolean
+  ) => {
+    return (
+      <View style={[styles.accordionHeader]}>
+        <Text style={styles.accordionHeaderText}>{section.title}</Text>
+        <Ionicons
+          name={isActive ? "chevron-up" : "chevron-down"}
+          size={20}
+          color="#000"
+        />
+      </View>
+    );
+  };
+
+  const renderContent = (section: any) => {
+    return (
+      <View style={styles.content}>
+        {section.title === "Sorting" && (
+          <DropDownPicker
+            open={menuVisible}
+            value={value}
+            items={items}
+            setOpen={setMenuVisible}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Sort By..."
+            style={styles.dropDownPicker}
+            dropDownContainerStyle={styles.dropDownContainer}
+            placeholderStyle={styles.placeHolder}
+          />
+        )}
+        {section.title === "Filtering" && (
+          <View style={styles.checkBoxRow}>
+            <Text style={styles.checkBoxText}>By Completion Status</Text>
+            <Checkbox
+              status={checked ? "checked" : "unchecked"}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+              color="#4a90e2"
+            />
+          </View>
+        )}
+      </View>
+    );
+  };
+
+  const updateSections = (activeSections: number[]) => {
+    setActiveSection(activeSections);
+  };
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -37,17 +117,13 @@ export default function ToDoHeader() {
           <View style={styles.modalContent}>
             <Text style={styles.headerText}>Organization Options</Text>
 
-            <DropDownPicker
-              open={menuVisible}
-              value={value}
-              items={items}
-              setOpen={setMenuVisible}
-              setValue={setValue}
-              setItems={setItems}
-              placeholder="Sort By..."
-              style={styles.dropDownPicker}
-              dropDownContainerStyle={styles.dropDownContainer}
-              placeholderStyle={styles.placeHolder}
+            <Accordion
+              activeSections={activeSections}
+              sections={SECTIONS}
+              renderHeader={renderHeader}
+              renderContent={renderContent}
+              onChange={updateSections}
+              expandMultiple={true}
             />
 
             <Ionicons
@@ -69,6 +145,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginRight: "1%",
+  },
+  content: {
+    padding: 15,
+  },
+  accordionHeader: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: "#000",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  accordionHeaderText: {
+    fontSize: 16,
+  },
+  checkBoxText: {},
+  checkBoxRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
   },
   modalContainer: {
     flex: 1,
@@ -118,7 +220,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   dropDownPicker: {
-    marginTop: 15,
+    top: 10,
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -133,4 +235,20 @@ const styles = StyleSheet.create({
   },
   placeHolder: { fontWeight: "bold" },
   label: {},
+  tabContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    backgroundColor: "grey",
+    padding: 10,
+  },
+  tab: {
+    color: "#ffffff",
+    fontSize: 16,
+  },
+  activeTab: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
