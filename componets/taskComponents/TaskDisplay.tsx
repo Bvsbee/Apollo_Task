@@ -6,6 +6,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AddButton from "./AddButton";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
+
+  
+
   const dispalyTask = ({ item }: { item: Task }) => (
     <View
       style={[
@@ -32,16 +35,18 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
 
   return (
     <View style={styles.container}>
-      {tasks.length > 0 && (
-        <View style={styles.displayList}>
-          <Text style={styles.headerText}>My Tasks</Text>
-          <FlatList
-            data={tasks}
-            renderItem={dispalyTask}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </View>
-      )}
+      <TouchableOpacity activeOpacity={1.0}>
+        {tasks.length > 0 && (
+          <View style={styles.displayList}>
+            <Text style={styles.headerText}>My Tasks</Text>
+            <FlatList
+              data={tasks}
+              renderItem={dispalyTask}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        )}
+      </TouchableOpacity>
     </View>
   );
 }

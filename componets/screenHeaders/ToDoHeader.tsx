@@ -46,6 +46,7 @@ export default function ToDoHeader() {
           <View style={styles.modalContent}>
             <Text style={styles.headerText}>Organization Options</Text>
 
+            <Text style={styles.sectionText}>Sorting</Text>
             <DropDownPicker
               open={firstDropDownVisible}
               value={firstDropDownValue}
@@ -54,11 +55,12 @@ export default function ToDoHeader() {
               setValue={setFirstDropDownValue}
               setItems={setFirstDropDownItems}
               placeholder="Sort By..."
-              style={styles.dropDownPicker}
-              dropDownContainerStyle={styles.dropDownContainer}
+              style={[styles.dropDownPicker]}
+              dropDownContainerStyle={[styles.dropDownContainer]}
               placeholderStyle={styles.placeHolder}
             />
 
+            <Text style={styles.sectionText}>Filtering</Text>
             <DropDownPicker
               open={secondDropdownOpen}
               value={secondDropdownValue}
@@ -67,8 +69,14 @@ export default function ToDoHeader() {
               setValue={setSecondDropdownValue}
               setItems={setSecondDropdownItems}
               placeholder="Filter By..."
-              style={styles.dropDownPicker}
-              dropDownContainerStyle={styles.dropDownContainer}
+              style={[
+                styles.dropDownPicker,
+                { zIndex: firstDropDownVisible ? 2000 : 1000 },
+              ]}
+              dropDownContainerStyle={[
+                styles.dropDownContainer,
+                { zIndex: firstDropDownVisible ? 2000 : 1000 },
+              ]}
               placeholderStyle={styles.placeHolder}
             />
 
@@ -128,6 +136,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
+  sectionText: {
+    marginTop: 10,
+    paddingHorizontal: 5,
+    fontWeight: "bold",
+  },
   contentText: {
     paddingTop: "5%",
     fontSize: 16,
@@ -139,6 +152,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#e74c3c",
     borderRadius: 50,
   },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
   dropDownPicker: {
     marginTop: 15,
     borderRadius: 10,
@@ -146,6 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   dropDownContainer: {
+    marginTop: 10,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
