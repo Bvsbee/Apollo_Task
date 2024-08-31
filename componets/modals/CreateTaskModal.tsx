@@ -113,7 +113,7 @@ export default function CreateTaskModal({
 
             {/* //Task Priority  View */}
             <View style={styles.inputRow}>
-              <Text style={styles.label}>Task Priority: </Text>
+              <Text style={styles.label}>Priority: </Text>
               <DropDownPicker
                 open={menuVisible}
                 value={value}
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   dueDateTextInput: {
-    width: 210,
+    width: 206,
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+    width: "63%",
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
@@ -338,7 +339,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   dropDown: {
-    width: 195,
+    width: "63%",
     backgroundColor: "#fff",
     left: 10,
     shadowColor: "#000",
@@ -348,8 +349,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   dropDownContainer: {
-    width: 195,
+    width: "63%",
     backgroundColor: "#fff",
+    left: 10,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
