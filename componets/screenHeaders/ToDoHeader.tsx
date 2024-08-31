@@ -9,12 +9,21 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
+  //First DropDown
+  const [firstDropDownVisible, setFirstDropDownVisible] = useState(false);
+  const [firstDropDownValue, setFirstDropDownValue] = useState(null);
+  const [firstDropDownItems, setFirstDropDownItems] = useState([
+    { label: "Sort By...", value: "Sort By..." },
     { label: "Name", value: "name" },
     { label: "Priority", value: "priority" },
     { label: "Due Date", value: "date" },
+  ]);
+
+  //Second DropDown
+  const [secondDropdownOpen, setSecondDropdownOpen] = useState(false);
+  const [secondDropdownValue, setSecondDropdownValue] = useState(null);
+  const [secondDropdownItems, setSecondDropdownItems] = useState([
+    { label: "Completion Status ", value: "Completion Status" },
   ]);
 
   const toggleModal = () => {
@@ -38,13 +47,26 @@ export default function ToDoHeader() {
             <Text style={styles.headerText}>Organization Options</Text>
 
             <DropDownPicker
-              open={menuVisible}
-              value={value}
-              items={items}
-              setOpen={setMenuVisible}
-              setValue={setValue}
-              setItems={setItems}
+              open={firstDropDownVisible}
+              value={firstDropDownValue}
+              items={firstDropDownItems}
+              setOpen={setFirstDropDownVisible}
+              setValue={setFirstDropDownValue}
+              setItems={setFirstDropDownItems}
               placeholder="Sort By..."
+              style={styles.dropDownPicker}
+              dropDownContainerStyle={styles.dropDownContainer}
+              placeholderStyle={styles.placeHolder}
+            />
+
+            <DropDownPicker
+              open={secondDropdownOpen}
+              value={secondDropdownValue}
+              items={secondDropdownItems}
+              setOpen={setSecondDropdownOpen}
+              setValue={setSecondDropdownValue}
+              setItems={setSecondDropdownItems}
+              placeholder="Filter By..."
               style={styles.dropDownPicker}
               dropDownContainerStyle={styles.dropDownContainer}
               placeholderStyle={styles.placeHolder}
@@ -131,6 +153,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  placeHolder: { fontWeight: "bold" },
+  placeHolder: { fontWeight: "500" },
   label: {},
 });
