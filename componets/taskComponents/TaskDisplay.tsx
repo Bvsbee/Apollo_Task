@@ -1,11 +1,25 @@
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
+import React, { useState } from "react";
 import Task from "../../classes/Task";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AddButton from "./AddButton";
+import HandleTaskModal from "../modals/HandleTaskModal";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
+
   const dispalyTask = ({ item }: { item: Task }) => (
     <View
       style={[
@@ -32,18 +46,22 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={1.0}>
-        {tasks.length > 0 && (
-          <View style={styles.displayList}>
-            <Text style={styles.headerText}>My Tasks</Text>
+      {tasks.length > 0 && (
+        <View style={styles.displayList}>
+          <Text style={styles.headerText}>My Tasks</Text>
+          <TouchableOpacity activeOpacity={0.8} onLongPress={toggleModal}>
             <FlatList
               data={tasks}
               renderItem={dispalyTask}
               keyExtractor={(item, index) => index.toString()}
             />
-          </View>
-        )}
-      </TouchableOpacity>
+          </TouchableOpacity>
+          <HandleTaskModal
+            toggleModal={toggleModal}
+            modalVisible={modalVisible}
+          />
+        </View>
+      )}
     </View>
   );
 }

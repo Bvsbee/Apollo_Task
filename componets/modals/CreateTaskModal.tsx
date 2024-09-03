@@ -31,6 +31,7 @@ export default function CreateTaskModal({
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
+  const [taskID, seTaskID] = useState(0);
 
   const [menuVisible, setMenuVisible] = useState(false);
   const [value, setValue] = useState<string | null>(null);
@@ -70,12 +71,14 @@ export default function CreateTaskModal({
     if (!errorHandling()) return;
 
     const newTask = new Task(
+      taskID,
       taskName,
       value!,
       selectedDate,
       description,
       "",
       false
+
     );
 
     setTaskName("");

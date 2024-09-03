@@ -1,4 +1,5 @@
 export default class Task {
+  taskID: number;
   name: string;
   priority: string;
   dueDate: string;
@@ -7,6 +8,7 @@ export default class Task {
   isCompleted: boolean;
 
   constructor(
+    taskID: number,
     name: string,
     priority: string,
     dueDate: string,
@@ -14,6 +16,7 @@ export default class Task {
     note: string,
     isCompleted: boolean
   ) {
+    this.taskID = taskID;
     this.name = name;
     this.priority = priority;
     this.dueDate = dueDate;

@@ -8,7 +8,7 @@ import "react-native-reanimated";
 import "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+
 
 interface Navbar {
   title: string;
