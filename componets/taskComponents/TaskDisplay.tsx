@@ -6,9 +6,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AddButton from "./AddButton";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
-
-  
-
   const dispalyTask = ({ item }: { item: Task }) => (
     <View
       style={[

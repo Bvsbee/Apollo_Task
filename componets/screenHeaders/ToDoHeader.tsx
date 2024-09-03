@@ -13,7 +13,7 @@ export default function ToDoHeader() {
   const [firstDropDownVisible, setFirstDropDownVisible] = useState(false);
   const [firstDropDownValue, setFirstDropDownValue] = useState(null);
   const [firstDropDownItems, setFirstDropDownItems] = useState([
-    { label: "Sort By...", value: "Sort By..." },
+    { label: "None", value: "None" },
     { label: "Name", value: "name" },
     { label: "Priority", value: "priority" },
     { label: "Due Date", value: "date" },
@@ -23,6 +23,7 @@ export default function ToDoHeader() {
   const [secondDropdownOpen, setSecondDropdownOpen] = useState(false);
   const [secondDropdownValue, setSecondDropdownValue] = useState(null);
   const [secondDropdownItems, setSecondDropdownItems] = useState([
+    { label: "None", value: "None" },
     { label: "Completion Status ", value: "Completion Status" },
   ]);
 
