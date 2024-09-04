@@ -21,7 +21,9 @@ export default function HandleTaskModal({
       >
         <View style={styles.modalContent}>
           <LinearGradient
-            colors={["#4CAF50", "#2E7D32"]}
+            colors={["#4a90e2", "#34a0a4"]} // Linear gradient colors
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
             style={styles.gradientView}
           >
             <Button style={styles.buttonView}>
@@ -30,7 +32,7 @@ export default function HandleTaskModal({
           </LinearGradient>
 
           <LinearGradient
-            colors={["#FF6F6F", "#D32F2F"]}
+            colors={["#DC143C", "#8B0000"]}
             style={styles.gradientView}
           >
             <Button style={styles.buttonView}>
@@ -43,7 +45,7 @@ export default function HandleTaskModal({
             style={styles.closeButton}
             size={26}
             onPress={toggleModal}
-          ></Ionicons>
+          />
         </View>
       </BlurView>
     </Modal>

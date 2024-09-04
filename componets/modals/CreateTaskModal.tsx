@@ -78,7 +78,6 @@ export default function CreateTaskModal({
       description,
       "",
       false
-
     );
 
     setTaskName("");
