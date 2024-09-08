@@ -6,15 +6,51 @@ import {
   SafeAreaView,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Task from "../../classes/Task";
 import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AddButton from "./AddButton";
 import HandleTaskModal from "../modals/HandleTaskModal";
+import { useActionSheet } from "@expo/react-native-action-sheet";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import EvilIcons from "@expo/vector-icons/EvilIcons";
+import BottomSheet from "@gorhom/bottom-sheet";
+import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
   const [modalVisible, setModalVisible] = useState(false);
+
+  /* const { showActionSheetWithOptions } = useActionSheet();
+
+  const onPress = () => {
+    const options = ["Mark Task Completed", "Remove Task"];
+    const icons = [
+      <AntDesign name="checksquareo" size={24} color="black" />,
+      <EvilIcons name="trash" size={24} color="black" />,
+    ];
+    
+    const destructiveButtonIndex = 1;
+
+    showActionSheetWithOptions(
+      {
+        message: "Select an option for the task",
+        options,
+        icons,
+        destructiveButtonIndex,
+      },
+      (selectedIndex: number | undefined) => {
+        switch (selectedIndex) {
+          case 1:
+            // Mark as Completed
+            break;
+          case 2:
+            // Remove/Delete Task
+            break;
+        }
+      }
+    );
+  }; */
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -25,7 +61,7 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
       style={[
         styles.taskItem,
         { borderEndColor: item.isCompleted ? "#228B22" : "#DC143C" },
-      ]} /* Forest Green ? Crimson Red. Conditonally Rendinger*/
+      ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
     >
       <View>
         <Text style={styles.taskText}>Task Name: {item.name}</Text>
@@ -50,16 +86,13 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
         <View style={styles.displayList}>
           <Text style={styles.headerText}>My Tasks</Text>
           <TouchableOpacity activeOpacity={0.8} onLongPress={toggleModal}>
+            <HandleTaskModal toggleModal={toggleModal} />
             <FlatList
               data={tasks}
               renderItem={dispalyTask}
               keyExtractor={(item, index) => index.toString()}
             />
           </TouchableOpacity>
-          <HandleTaskModal
-            toggleModal={toggleModal}
-            modalVisible={modalVisible}
-          />
         </View>
       )}
     </View>

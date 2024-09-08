@@ -21,3 +21,32 @@
         </LinearGradient>
       </View>
     </View>
+
+
+   **Code for modal pop up handling task*
+ <!-- <TouchableOpacity>
+            <LinearGradient
+              colors={["#4a90e2", "#34a0a4"]} // Linear gradient colors
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.gradientView}
+            >
+              <Text style={styles.textStyles}>Mark Task Completed</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <LinearGradient
+              colors={["#DC143C", "#8B0000"]}
+              style={styles.gradientView}
+            >
+              <Text style={styles.textStyles}>Remove Task</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <Ionicons
+            name="close"
+            style={styles.closeButton}
+            size={26}
+            onPress={toggleModal}
+          /> -->

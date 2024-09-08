@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: "2%",
     top: "4%",
-    backgroundColor: "#e74c3c",
+
     borderRadius: 50,
   },
   row: {

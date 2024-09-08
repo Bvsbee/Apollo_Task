@@ -6,12 +6,16 @@ import "react-native-reanimated";
 import "react-native-gesture-handler";
 import DrawerNavigator from "./componets/drawerComponents/DrawerNavigator";
 import CombinedNavigator from "./componets/CombinedNavigator";
+import GestureHandlerRootView from "react-native-gesture-handler";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <DrawerNavigator />
-    </NavigationContainer>
+    <ActionSheetProvider>
+      <NavigationContainer>
+        <DrawerNavigator />
+      </NavigationContainer>
+    </ActionSheetProvider>
   );
 }
 
