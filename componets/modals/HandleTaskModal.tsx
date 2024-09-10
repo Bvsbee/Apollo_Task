@@ -26,13 +26,19 @@ export default function HandleTaskModal({
         <TouchableOpacity style={styles.overLay}>
           <View style={styles.modalContainer}>
             <View style={styles.modalContent}>
-              <View style={{ flexDirection: "row", alignItems: "center",  }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                }}
+              >
                 <View style={{ flexDirection: "column", alignItems: "center" }}>
                   <Ionicons name="checkmark-outline" size={24} color="black" />
                   <Text>Complete Task</Text>
                 </View>
 
-                <View>
+                <View style={{ flexDirection: "column", alignItems: "center" }}>
                   <Ionicons name="trash-outline" size={24} color="black" />
                   <Text>Remove Task</Text>
                 </View>
@@ -55,10 +61,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     width: "100%",
+    top: "46.5%",
   },
   modalContent: {
     width: "100%",
-    backgroundColor: "#fff",
+    padding: 8,
+    backgroundColor: "#d8f3ff",
+    borderWidth: 1,
     elevation: 5, // Shadow Android
     shadowColor: "#000", // Shadow IOS
     shadowOffset: { width: 0, height: 2 },

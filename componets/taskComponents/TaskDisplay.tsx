@@ -17,6 +17,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import BottomSheet from "@gorhom/bottom-sheet";
 import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet";
+import FloatingButton from "../modals/FloatingButton";
 
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -86,7 +87,13 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
         <View style={styles.displayList}>
           <Text style={styles.headerText}>My Tasks</Text>
           <TouchableOpacity activeOpacity={0.8} onLongPress={toggleModal}>
-            <HandleTaskModal toggleModal={toggleModal} />
+            {/*  <HandleTaskModal
+              toggleModal={toggleModal}
+              modalVisible={modalVisible}
+            /> */}
+
+            <FloatingButton />
+
             <FlatList
               data={tasks}
               renderItem={dispalyTask}
