@@ -9,7 +9,7 @@ export default function FloatingButton() {
       text: "Create New Task",
       icon: <Ionicons name="create-outline" size={24} color="#4a90e2" />,
       name: "create_task",
-      position: 3,
+      position: 1,
     },
 
     {
@@ -22,7 +22,7 @@ export default function FloatingButton() {
       text: "Remove Task",
       icon: <Ionicons name="trash-outline" size={24} color="#4a90e2" />,
       name: "remove_task",
-      position: 1,
+      position: 3,
     },
   ];
 

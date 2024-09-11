@@ -92,8 +92,6 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
               modalVisible={modalVisible}
             /> */}
 
-            <FloatingButton />
-
             <FlatList
               data={tasks}
               renderItem={dispalyTask}

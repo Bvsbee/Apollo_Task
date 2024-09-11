@@ -31,13 +31,11 @@ export default function TaskList() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.addButton}>
-        <AddButton
-          tasks={tasks}
-          createNewTask={createNewTask}
-          toggleModal={toggleModal}
-        />
-      </View>
+      <AddButton
+        tasks={tasks}
+        createNewTask={createNewTask}
+        toggleModal={toggleModal}
+      />
 
       <View style={styles.displayList}>
         <TaskDisplay tasks={tasks} />
@@ -54,15 +52,10 @@ export default function TaskList() {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  addButton: {
-    flex: 1,
+
+  displayList: {
     position: "absolute",
     justifyContent: "center",
-  },
-  displayList: {
-    flex: 1,
-    justifyContent: "center",
-
     width: "100%",
   },
 });
