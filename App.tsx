@@ -8,14 +8,17 @@ import DrawerNavigator from "./componets/drawerComponents/DrawerNavigator";
 import CombinedNavigator from "./componets/CombinedNavigator";
 import GestureHandlerRootView from "react-native-gesture-handler";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { TaskProvider } from "./context/TaskProvider";
 
 export default function App() {
   return (
-    <ActionSheetProvider>
-      <NavigationContainer>
-        <DrawerNavigator />
-      </NavigationContainer>
-    </ActionSheetProvider>
+    <TaskProvider>
+      <ActionSheetProvider>
+        <NavigationContainer>
+          <DrawerNavigator />
+        </NavigationContainer>
+      </ActionSheetProvider>
+    </TaskProvider>
   );
 }
 
