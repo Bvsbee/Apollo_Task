@@ -22,37 +22,6 @@ import FloatingButton from "../modals/FloatingButton";
 export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
   const [modalVisible, setModalVisible] = useState(false);
 
-  /* const { showActionSheetWithOptions } = useActionSheet();
-
-  const onPress = () => {
-    const options = ["Mark Task Completed", "Remove Task"];
-    const icons = [
-      <AntDesign name="checksquareo" size={24} color="black" />,
-      <EvilIcons name="trash" size={24} color="black" />,
-    ];
-    
-    const destructiveButtonIndex = 1;
-
-    showActionSheetWithOptions(
-      {
-        message: "Select an option for the task",
-        options,
-        icons,
-        destructiveButtonIndex,
-      },
-      (selectedIndex: number | undefined) => {
-        switch (selectedIndex) {
-          case 1:
-            // Mark as Completed
-            break;
-          case 2:
-            // Remove/Delete Task
-            break;
-        }
-      }
-    );
-  }; */
-
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
@@ -86,18 +55,12 @@ export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
       {tasks.length > 0 && (
         <View style={styles.displayList}>
           <Text style={styles.headerText}>My Tasks</Text>
-          <TouchableOpacity activeOpacity={0.8} onLongPress={toggleModal}>
-            {/*  <HandleTaskModal
-              toggleModal={toggleModal}
-              modalVisible={modalVisible}
-            /> */}
 
-            <FlatList
-              data={tasks}
-              renderItem={dispalyTask}
-              keyExtractor={(item, index) => index.toString()}
-            />
-          </TouchableOpacity>
+          <FlatList
+            data={tasks}
+            renderItem={dispalyTask}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
       )}
     </View>
