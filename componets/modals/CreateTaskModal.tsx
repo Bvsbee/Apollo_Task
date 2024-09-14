@@ -70,8 +70,10 @@ export default function CreateTaskModal({
   const createTask = () => {
     if (!errorHandling()) return;
 
+    const newTaskID = Date.now();
+
     const newTask = new Task(
-      taskID,
+      newTaskID,
       taskName,
       value!,
       selectedDate,

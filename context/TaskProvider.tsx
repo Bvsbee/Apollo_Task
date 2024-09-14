@@ -30,7 +30,14 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
 
   // Function adding a new task upon Creation
   const addTask = (task: Task) => {
-    setTasksMap((prevMap) => new Map(prevMap).set(task.taskID, task));
+    setTasksMap((prevMap) => {
+      const updatedMap = new Map(prevMap);
+
+      updatedMap.set(task.taskID, task);
+
+      return updatedMap;
+    });
+
     setTaskOrder((prevOrder) => [...prevOrder, task.taskID]);
   };
 
@@ -45,7 +52,19 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskOrder((prevOrder) => prevOrder.filter((taskID) => taskID! == id));
   };
 
-  const completeTask = (id: number) => {};
+  const completeTask = (id: number) => {
+    setTasksMap((prevMap) => {
+      const updatedMap = new Map(prevMap);
+      const task = updatedMap.get(id);
+
+      if (task) {
+        task.isCompleted = true;
+        updatedMap.set(id, task);
+      }
+
+      return updatedMap;
+    });
+  };
 
   const sortTask = (criteria: "name" | "priority" | "dueDate") => {};
 
