@@ -31,21 +31,13 @@ export default function TaskList() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AddButton
-        tasks={tasks}
-        createNewTask={createNewTask}
-        toggleModal={toggleModal}
-      />
+      <AddButton toggleModal={toggleModal} />
 
       <View style={styles.displayList}>
-        <TaskDisplay tasks={tasks} />
+        <TaskDisplay />
       </View>
 
-      <CreateTaskModal
-        createNewTask={createNewTask}
-        modalVisible={modalVisible}
-        toggleModal={toggleModal}
-      />
+      <CreateTaskModal modalVisible={modalVisible} toggleModal={toggleModal} />
     </SafeAreaView>
   );
 }
