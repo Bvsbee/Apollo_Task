@@ -18,46 +18,52 @@ import EvilIcons from "@expo/vector-icons/EvilIcons";
 import BottomSheet from "@gorhom/bottom-sheet";
 import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet";
 import FloatingButton from "../modals/FloatingButton";
+import { useTaskContext } from "../../context/TaskProvider";
 
-export default function TaskDisplay({ tasks }: { tasks: Task[] }) {
+export default function TaskDisplay() {
   const [modalVisible, setModalVisible] = useState(false);
+  const { taskOrder, tasksMap } = useTaskContext();
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const dispalyTask = ({ item }: { item: Task }) => (
-    <View
-      style={[
-        styles.taskItem,
-        { borderEndColor: item.isCompleted ? "#228B22" : "#DC143C" },
-      ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
-    >
-      <View>
-        <Text style={styles.taskText}>Task Name: {item.name}</Text>
-      </View>
-      <View>
-        <Text style={styles.taskText}>Priority: {item.priority}</Text>
-      </View>
-      <View>
-        <Text style={styles.taskText}>Due: {item.dueDate}</Text>
-      </View>
-      {item.description && (
+  const dispalyTask = ({ item }: { item: number }) => {
+    const task = tasksMap.get(item);
+    if (!task) return null;
+    return (
+      <View
+        style={[
+          styles.taskItem,
+          { borderEndColor: task.isCompleted ? "#228B22" : "#DC143C" },
+        ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
+      >
         <View>
-          <Text style={styles.taskText}>Description: {item.description}</Text>
+          <Text style={styles.taskText}>Task Name: {task.name}</Text>
         </View>
-      )}
-    </View>
-  );
+        <View>
+          <Text style={styles.taskText}>Priority: {task.priority}</Text>
+        </View>
+        <View>
+          <Text style={styles.taskText}>Due: {task.dueDate}</Text>
+        </View>
+        {task.description && (
+          <View>
+            <Text style={styles.taskText}>Description: {task.description}</Text>
+          </View>
+        )}
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
-      {tasks.length > 0 && (
+      {tasksMap.size > 0 && (
         <View style={styles.displayList}>
           <Text style={styles.headerText}>My Tasks</Text>
 
           <FlatList
-            data={tasks}
+            data={taskOrder}
             renderItem={dispalyTask}
             keyExtractor={(item, index) => index.toString()}
           />

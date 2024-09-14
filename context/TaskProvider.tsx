@@ -13,7 +13,6 @@ interface TaskContextInterface {
   completeTask: (id: number) => void;
   sortTask: (criteria: "name" | "priority" | "dueDate") => void;
 }
-m;
 
 // Creating the context to be used globally. Is initially undefined.
 const TaskContext = createContext<TaskContextInterface | undefined>(undefined);
@@ -35,6 +34,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskOrder((prevOrder) => [...prevOrder, task.taskID]);
   };
 
+  // Function to remove a task based on the id number
   const removeTask = (id: number) => {
     setTasksMap((prevMap) => {
       const updatedMap = new Map(prevMap);

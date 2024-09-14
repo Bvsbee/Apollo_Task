@@ -12,16 +12,15 @@ import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 import { FloatingAction } from "react-native-floating-action";
 import FloatingButton from "../modals/FloatingButton";
+import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
-  tasks,
-  createNewTask,
   toggleModal,
 }: {
-  tasks: Task[];
-  createNewTask: (task: Task) => void;
   toggleModal: () => void;
 }) {
+  const { tasksMap } = useTaskContext();
+
   const actions = [
     {
       text: "Create New Task",
@@ -48,7 +47,7 @@ export default function AddButton({
   ];
   return (
     <View style={styles.container}>
-      {tasks.length === 0 ? (
+      {tasksMap.size === 0 ? (
         <View style={styles.placeHolderView}>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -76,7 +75,7 @@ export default function AddButton({
               color: "green";
               toggleModal();
             }
-            if (name === "remove_tas") {
+            if (name === "remove_task") {
               color: "red";
             }
           }}

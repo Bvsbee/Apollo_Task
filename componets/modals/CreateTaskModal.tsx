@@ -6,25 +6,23 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { BlurView } from "expo-blur";
 import { TextInput } from "react-native-gesture-handler";
-
 import { Calendar } from "react-native-calendars";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 import { Ionicons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useTaskContext } from "../../context/TaskProvider";
 
 export default function CreateTaskModal({
   modalVisible,
   toggleModal,
-  createNewTask,
 }: {
   modalVisible: boolean;
   toggleModal: () => void;
-  createNewTask: (task: Task) => void;
 }) {
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
@@ -32,6 +30,8 @@ export default function CreateTaskModal({
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
   const [taskID, seTaskID] = useState(0);
+
+  const { addTask } = useTaskContext();
 
   const [menuVisible, setMenuVisible] = useState(false);
   const [value, setValue] = useState<string | null>(null);
@@ -87,7 +87,7 @@ export default function CreateTaskModal({
 
     toggleModal();
 
-    createNewTask(newTask);
+    addTask(newTask);
   };
 
   return (
