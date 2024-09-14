@@ -11,6 +11,7 @@ interface TaskContextInterface {
   addTask: (task: Task) => void;
   removeTask: (id: number) => void;
   completeTask: (id: number) => void;
+  selectTask: (id: number) => void;
   sortTask: (criteria: "name" | "priority" | "dueDate") => void;
 }
 
@@ -66,6 +67,22 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     });
   };
 
+
+  const selectTask = (id: number) => 
+  {
+    setTasksMap((prevMap) => {
+      const updatedMap = new Map(prevMap);
+      const task = updatedMap.get(id);
+
+      if(task) {
+        task.isSelected = true;
+        updatedMap.set(id,task);
+      }
+
+      return updatedMap;
+    })
+  }
+
   const sortTask = (criteria: "name" | "priority" | "dueDate") => {};
 
   return (
@@ -77,6 +94,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
         removeTask,
         completeTask,
         sortTask,
+        selectTask,
       }}
     >
       {children}

@@ -5,36 +5,35 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import Task from "../../classes/Task";
 import AddButton from "./AddButton";
-import RemoveButton from "./RemoveButton";
+
 import TaskDisplay from "./TaskDisplay";
 import CreateTaskModal from "../modals/CreateTaskModal";
-import ToDoHeader from "../screenHeaders/ToDoHeader";
 
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
 export default function TaskList() {
-  const [tasks, setTask] = useState<Task[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [organizeModalVisible, setOrganizeModalVisible] = useState(false);
+  const [buttonActive, setButtonActive] = useState(false);
 
-  const createNewTask = (task: Task) => {
-    setTask([...tasks, task]);
+  const markButtonActive = () => {
+    setButtonActive(!buttonActive);
+
+    console.log("Button is Active");
   };
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const toggleOrganizeModal = () => {
-    setOrganizeModalVisible(!organizeModalVisible);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <AddButton toggleModal={toggleModal} />
+      <AddButton
+        toggleModal={toggleModal}
+        markButtonActive={markButtonActive}
+      />
 
       <View style={styles.displayList}>
-        <TaskDisplay />
+        <TaskDisplay buttonActive={buttonActive} />
       </View>
 
       <CreateTaskModal modalVisible={modalVisible} toggleModal={toggleModal} />

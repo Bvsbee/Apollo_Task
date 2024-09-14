@@ -16,10 +16,15 @@ import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
   toggleModal,
+  markButtonActive,
 }: {
   toggleModal: () => void;
+  markButtonActive: () => void;
 }) {
-  const { tasksMap } = useTaskContext();
+  const [selectedAction, setSelectedAction] = useState<
+    "mark_task" | "remove_task" | null
+  >(null);
+  const { tasksMap, taskOrder } = useTaskContext();
 
   const actions = [
     {
@@ -70,13 +75,16 @@ export default function AddButton({
           position="right"
           actions={actions}
           color="#4a90e2"
+          onPressMain={markButtonActive}
+          onClose={markButtonActive}
           onPressItem={(name) => {
             if (name === "create_task") {
-              color: "green";
               toggleModal();
-            }
-            if (name === "remove_task") {
-              color: "red";
+              console.log("Create button pressed");
+            } else if (name === "remove_task") {
+              setSelectedAction("remove_task");
+            } else if (name === "mark_task") {
+              setSelectedAction("remove_task");
             }
           }}
         />

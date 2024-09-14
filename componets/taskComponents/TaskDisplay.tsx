@@ -20,13 +20,20 @@ import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import FloatingButton from "../modals/FloatingButton";
 import { useTaskContext } from "../../context/TaskProvider";
 
-export default function TaskDisplay() {
+export default function TaskDisplay({
+  buttonActive,
+}: {
+  buttonActive: boolean;
+}) {
   const [modalVisible, setModalVisible] = useState(false);
-  const { taskOrder, tasksMap } = useTaskContext();
+  const [selectedTask, setSelectedTask] = useState(false);
+  const { taskOrder, tasksMap, selectTask } = useTaskContext();
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+
+  const markSelected = (id: number) => {};
 
   const dispalyTask = ({ item }: { item: number }) => {
     const task = tasksMap.get(item);
@@ -46,6 +53,11 @@ export default function TaskDisplay() {
         </View>
         <View>
           <Text style={styles.taskText}>Due: {task.dueDate}</Text>
+        </View>
+        <View>
+          {buttonActive && (
+            <View style={{ backgroundColor: "red", width: "100%" }}></View>
+          )}
         </View>
         {task.description && (
           <View>
