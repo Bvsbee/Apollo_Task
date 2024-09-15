@@ -65,9 +65,9 @@ export default class Task {
   }
 
   taskSelected(): boolean {
-    return this.isSelected
+    return this.isSelected;
   }
-  
+
   taskCompleted(): boolean {
     return this.isCompleted;
   }

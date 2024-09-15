@@ -79,6 +79,7 @@ export default function CreateTaskModal({
       selectedDate,
       description,
       "",
+      false,
       false
     );
 

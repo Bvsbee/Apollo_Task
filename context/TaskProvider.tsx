@@ -13,7 +13,10 @@ interface TaskContextInterface {
   completeTask: (id: number) => void;
   selectTask: (id: number) => void;
   clearSelectedSet: () => void;
-  sortTask: (criteria: "name" | "priority" | "dueDate") => void;
+  sortTask: (
+    criteria: "name" | "priority" | "dueDate" | null,
+    filterCriteria: "completion_status" | null
+  ) => void;
 }
 
 // Creating the context to be used globally. Is initially undefined.
@@ -90,7 +93,43 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setSelectedSet(new Set());
   };
 
-  const sortTask = (criteria: "name" | "priority" | "dueDate") => {};
+  const sortTask = (
+    criteria: "name" | "priority" | "dueDate" | null,
+    filterCriteria: "completion_status" | null
+  ) => {
+    setTaskOrder((prevOrder) => {
+      let sortedOrder = [...prevOrder];
+
+      if (filterCriteria === "completion_status") {
+      } else if (filterCriteria === "null") {
+        return sortedOrder;
+      }
+
+      if (criteria === "name") {
+        sortedOrder.sort((a, b) => {
+          const taskA = tasksMap.get(a);
+          const taskB = tasksMap.get(b);
+
+          return taskA && taskB ? taskA.name.localeCompare(taskB.name) : 0;
+        });
+      } else if (criteria === "dueDate") {
+        sortedOrder.sort((a, b) => {
+          const taskA = tasksMap.get(a);
+          const taskB = tasksMap.get(b);
+
+          return taskA && taskB
+            ? new Date(taskA.dueDate).getTime() -
+                new Date(taskB.dueDate).getTime()
+            : 0;
+        });
+      } else if (criteria === "priority") {
+      } else if (criteria === "null") {
+        return sortedOrder;
+      }
+
+      return sortedOrder;
+    });
+  };
 
   return (
     <TaskContext.Provider

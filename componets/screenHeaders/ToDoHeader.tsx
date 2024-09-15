@@ -1,30 +1,31 @@
-import { View, Text, StyleSheet, Modal } from "react-native";
-import React, { useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import React, { useContext, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import Task from "../../classes/Task";
 import { BlurView } from "expo-blur";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Ionicons } from "@expo/vector-icons";
+import { useTaskContext } from "../../context/TaskProvider";
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
+  const { sortTask } = useTaskContext();
   //First DropDown
   const [firstDropDownVisible, setFirstDropDownVisible] = useState(false);
   const [firstDropDownValue, setFirstDropDownValue] = useState(null);
   const [firstDropDownItems, setFirstDropDownItems] = useState([
-    { label: "None", value: "None" },
+    { label: "None", value: "null" },
     { label: "Name", value: "name" },
     { label: "Priority", value: "priority" },
-    { label: "Due Date", value: "date" },
+    { label: "Due Date", value: "dueDate" },
   ]);
 
   //Second DropDown
   const [secondDropdownOpen, setSecondDropdownOpen] = useState(false);
   const [secondDropdownValue, setSecondDropdownValue] = useState(null);
   const [secondDropdownItems, setSecondDropdownItems] = useState([
-    { label: "None", value: "None" },
-    { label: "Completion Status ", value: "Completion Status" },
+    { label: "None", value: "null" },
+    { label: "Completion Status ", value: "completion_status" },
   ]);
 
   const toggleModal = () => {
@@ -80,6 +81,27 @@ export default function ToDoHeader() {
               ]}
               placeholderStyle={styles.placeHolder}
             />
+
+            <LinearGradient
+              colors={["#4a90e2", "#34a0a4"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={[
+                styles.gradientView,
+                { marginTop: 30, zIndex: secondDropdownOpen ? 0 : 2001 },
+              ]}
+            >
+              <TouchableOpacity
+                activeOpacity={0.1}
+                onPress={() => {
+                  sortTask(firstDropDownValue, secondDropdownValue),
+                    toggleModal();
+                }}
+                style={{ zIndex: secondDropdownOpen ? 0 : 2001 }}
+              >
+                <Text style={styles.text}>Confirm Action!</Text>
+              </TouchableOpacity>
+            </LinearGradient>
 
             <Ionicons
               name="close"
@@ -174,5 +196,11 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   placeHolder: { fontWeight: "500" },
+  text: {
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
   label: {},
 });
