@@ -27,8 +27,8 @@ export default function TaskDisplay({
   buttonActive: boolean;
 }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(false);
-  const { taskOrder, tasksMap, selectTask, completeTask } = useTaskContext();
+  const { taskOrder, tasksMap, selectedTaskSet, selectTask, completeTask } =
+    useTaskContext();
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -37,12 +37,16 @@ export default function TaskDisplay({
   const dispalyTask = ({ item }: { item: number }) => {
     const task = tasksMap.get(item);
     if (!task) return null;
+
+    const isSelected = selectedTaskSet.has(item);
+
     return buttonActive ? (
       <TouchableOpacity activeOpacity={0.8} onPress={() => selectTask(item)}>
         <View
           style={[
             styles.taskItem,
             { borderEndColor: task.isCompleted ? "#228B22" : "#DC143C" },
+            isSelected && styles.selectedTask,
           ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
         >
           <View>
@@ -54,11 +58,6 @@ export default function TaskDisplay({
           <View>
             <Text style={styles.taskText}>Due: {task.dueDate}</Text>
           </View>
-          {task.isSelected && (
-            <View>
-              <Text>Hello</Text>
-            </View>
-          )}
           {task.description && (
             <View>
               <Text style={styles.taskText}>
@@ -157,6 +156,15 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     position: "relative",
+  },
+  selectedTask: {
+    borderWidth: 3,
+    shadowColor: "#4a90e2",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    elevation: 10,
+    transform: [{ scale: 1.05 }],
   },
   displayList: { flex: 1, width: "100%", paddingHorizontal: 10 },
   radioButton: {

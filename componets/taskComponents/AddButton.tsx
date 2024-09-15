@@ -26,7 +26,13 @@ export default function AddButton({
   const [selectedAction, setSelectedAction] = useState<
     "mark_task" | "remove_task" | null
   >(null);
-  const { tasksMap, taskOrder, completeTask, removeTask } = useTaskContext();
+  const {
+    tasksMap,
+    selectedTaskSet,
+    completeTask,
+    removeTask,
+    clearSelectedSet,
+  } = useTaskContext();
 
   const actions = [
     {
@@ -77,26 +83,26 @@ export default function AddButton({
           position="right"
           actions={actions}
           color="#4a90e2"
-          onPressMain={markButtonActive}
-          onClose={markButtonActive}
+          onPressMain={() => {
+            markButtonActive(), clearSelectedSet();
+          }}
+          onClose={() => {
+            markButtonActive(), clearSelectedSet();
+          }}
           onPressItem={(name) => {
             if (name === "create_task") {
               toggleModal();
             } else if (name === "remove_task") {
               setSelectedAction("remove_task");
 
-              tasksMap.forEach((task, id) => {
-                if (task.isSelected) {
-                  removeTask(id);
-                }
+              selectedTaskSet.forEach((id) => {
+                removeTask(id);
               });
             } else if (name === "mark_task") {
               setSelectedAction("mark_task");
 
-              tasksMap.forEach((task, id) => {
-                if (task.isSelected) {
-                  completeTask(id);
-                }
+              selectedTaskSet.forEach((id) => {
+                completeTask(id);
               });
             }
           }}

@@ -6,12 +6,13 @@ interface TaskContextInterface {
   // Structures to store task
   tasksMap: Map<number, Task>;
   taskOrder: number[];
-
+  selectedTaskSet: Set<number>;
   // Functions to handle various operations of Task
   addTask: (task: Task) => void;
   removeTask: (id: number) => void;
   completeTask: (id: number) => void;
   selectTask: (id: number) => void;
+  clearSelectedSet: () => void;
   sortTask: (criteria: "name" | "priority" | "dueDate") => void;
 }
 
@@ -28,6 +29,9 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
 
   // Array to store taskID's to render in proper order
   const [taskOrder, setTaskOrder] = useState<number[]>([]);
+
+  // Set to store selected task
+  const [selectedTaskSet, setSelectedSet] = useState<Set<number>>(new Set());
 
   // Function adding a new task upon Creation
   const addTask = (task: Task) => {
@@ -69,17 +73,21 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   };
 
   const selectTask = (id: number) => {
-    setTasksMap((prevMap) => {
-      const updatedMap = new Map(prevMap);
-      const task = updatedMap.get(id);
+    setSelectedSet((prevSelectedSet) => {
+      const updatedSelectedSet = new Set(prevSelectedSet);
 
-      if (task) {
-        task.isSelected = !task.isSelected;
-        updatedMap.set(id, task);
+      if (updatedSelectedSet.has(id)) {
+        updatedSelectedSet.delete(id);
+      } else {
+        updatedSelectedSet.add(id);
       }
 
-      return updatedMap;
+      return updatedSelectedSet;
     });
+  };
+
+  const clearSelectedSet = () => {
+    setSelectedSet(new Set());
   };
 
   const sortTask = (criteria: "name" | "priority" | "dueDate") => {};
@@ -89,11 +97,13 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       value={{
         tasksMap,
         taskOrder,
+        selectedTaskSet,
         addTask,
         removeTask,
         completeTask,
         sortTask,
         selectTask,
+        clearSelectedSet,
       }}
     >
       {children}
