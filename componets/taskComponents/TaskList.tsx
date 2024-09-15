@@ -17,8 +17,6 @@ export default function TaskList() {
 
   const markButtonActive = () => {
     setButtonActive(!buttonActive);
-
-    console.log("Button is Active");
   };
 
   const toggleModal = () => {
@@ -30,6 +28,7 @@ export default function TaskList() {
       <AddButton
         toggleModal={toggleModal}
         markButtonActive={markButtonActive}
+        buttonActive={buttonActive}
       />
 
       <View style={styles.displayList}>

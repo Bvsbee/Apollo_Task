@@ -19,6 +19,7 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet";
 import FloatingButton from "../modals/FloatingButton";
 import { useTaskContext } from "../../context/TaskProvider";
+import Fontisto from "@expo/vector-icons/Fontisto";
 
 export default function TaskDisplay({
   buttonActive,
@@ -27,18 +28,47 @@ export default function TaskDisplay({
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState(false);
-  const { taskOrder, tasksMap, selectTask } = useTaskContext();
+  const { taskOrder, tasksMap, selectTask, completeTask } = useTaskContext();
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
 
-  const markSelected = (id: number) => {};
-
   const dispalyTask = ({ item }: { item: number }) => {
     const task = tasksMap.get(item);
     if (!task) return null;
-    return (
+    return buttonActive ? (
+      <TouchableOpacity activeOpacity={0.8} onPress={() => selectTask(item)}>
+        <View
+          style={[
+            styles.taskItem,
+            { borderEndColor: task.isCompleted ? "#228B22" : "#DC143C" },
+          ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
+        >
+          <View>
+            <Text style={styles.taskText}>Task Name: {task.name}</Text>
+          </View>
+          <View>
+            <Text style={styles.taskText}>Priority: {task.priority}</Text>
+          </View>
+          <View>
+            <Text style={styles.taskText}>Due: {task.dueDate}</Text>
+          </View>
+          {task.isSelected && (
+            <View>
+              <Text>Hello</Text>
+            </View>
+          )}
+          {task.description && (
+            <View>
+              <Text style={styles.taskText}>
+                Description: {task.description}
+              </Text>
+            </View>
+          )}
+        </View>
+      </TouchableOpacity>
+    ) : (
       <View
         style={[
           styles.taskItem,
@@ -54,11 +84,7 @@ export default function TaskDisplay({
         <View>
           <Text style={styles.taskText}>Due: {task.dueDate}</Text>
         </View>
-        <View>
-          {buttonActive && (
-            <View style={{ backgroundColor: "red", width: "100%" }}></View>
-          )}
-        </View>
+
         {task.description && (
           <View>
             <Text style={styles.taskText}>Description: {task.description}</Text>
@@ -133,4 +159,10 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   displayList: { flex: 1, width: "100%", paddingHorizontal: 10 },
+  radioButton: {
+    flex: 1,
+    position: "absolute",
+    left: "75%",
+    bottom: "5%",
+  },
 });

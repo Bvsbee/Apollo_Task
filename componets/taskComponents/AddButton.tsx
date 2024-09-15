@@ -17,14 +17,16 @@ import { useTaskContext } from "../../context/TaskProvider";
 export default function AddButton({
   toggleModal,
   markButtonActive,
+  buttonActive,
 }: {
   toggleModal: () => void;
   markButtonActive: () => void;
+  buttonActive: boolean;
 }) {
   const [selectedAction, setSelectedAction] = useState<
     "mark_task" | "remove_task" | null
   >(null);
-  const { tasksMap, taskOrder } = useTaskContext();
+  const { tasksMap, taskOrder, completeTask, removeTask } = useTaskContext();
 
   const actions = [
     {
@@ -80,11 +82,22 @@ export default function AddButton({
           onPressItem={(name) => {
             if (name === "create_task") {
               toggleModal();
-              console.log("Create button pressed");
             } else if (name === "remove_task") {
               setSelectedAction("remove_task");
+
+              tasksMap.forEach((task, id) => {
+                if (task.isSelected) {
+                  removeTask(id);
+                }
+              });
             } else if (name === "mark_task") {
-              setSelectedAction("remove_task");
+              setSelectedAction("mark_task");
+
+              tasksMap.forEach((task, id) => {
+                if (task.isSelected) {
+                  completeTask(id);
+                }
+              });
             }
           }}
         />
