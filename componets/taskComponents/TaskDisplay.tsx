@@ -45,7 +45,11 @@ export default function TaskDisplay({
         <View
           style={[
             styles.taskItem,
-            { borderEndColor: task.isCompleted ? "#228B22" : "#DC143C" },
+            {
+              borderEndColor: task.isCompleted ? "#228B22" : "#DC143C",
+              borderColor:
+                isSelected && task.isCompleted ? "#228B22" : "#DC143C",
+            },
             isSelected && styles.selectedTask,
           ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
         >
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   selectedTask: {
-    borderWidth: 3,
+    borderWidth: 4,
     shadowColor: "#4a90e2",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.5,
