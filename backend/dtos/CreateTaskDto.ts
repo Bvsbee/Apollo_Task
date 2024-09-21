@@ -1,18 +1,13 @@
-import { PriorityEnum } from "task/TaskPriority-enum";
-
+import { PriorityEnum } from 'task/TaskPriority-enum';
 
 export class CreateTaskDto {
+  id: string;
 
-    id: string;
+  name: string;
 
-    name: string;
+  priority: PriorityEnum;
 
-    priority: PriorityEnum;
+  dueDate: string;
 
-    dueDate: string;
-
-    desc: string;
-
-    
-   
+  desc: string;
 }
