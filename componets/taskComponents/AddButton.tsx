@@ -1,17 +1,10 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import Task from "../../classes/Task";
+
 import { FloatingAction } from "react-native-floating-action";
-import FloatingButton from "../modals/FloatingButton";
+
 import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
