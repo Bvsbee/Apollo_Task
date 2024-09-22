@@ -13,10 +13,8 @@ interface TaskContextInterface {
   completeTask: (id: number) => void;
   selectTask: (id: number) => void;
   clearSelectedSet: () => void;
-  sortTask: (
-    criteria: "name" | "priority" | "dueDate" | null,
-    filterCriteria: "completion_status" | null
-  ) => void;
+  sortTask: (criteria: "name" | "priority" | "dueDate" | null) => void;
+  filterTask: (criteria: "completion_status" | null) => void;
 }
 
 // Creating the context to be used globally. Is initially undefined.
@@ -93,17 +91,9 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setSelectedSet(new Set());
   };
 
-  const sortTask = (
-    criteria: "name" | "priority" | "dueDate" | null,
-    filterCriteria: "completion_status" | null
-  ) => {
+  const sortTask = (criteria: "name" | "priority" | "dueDate" | null) => {
     setTaskOrder((prevOrder) => {
       let sortedOrder = [...prevOrder];
-
-      if (filterCriteria === "completion_status") {
-      } else if (filterCriteria === "null") {
-        return sortedOrder;
-      }
 
       if (criteria === "name") {
         sortedOrder.sort((a, b) => {
@@ -113,6 +103,8 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
           return taskA && taskB ? taskA.name.localeCompare(taskB.name) : 0;
         });
       } else if (criteria === "dueDate") {
+        // If the sort criteria is equal in data type and value sort by date creating 2 task
+
         sortedOrder.sort((a, b) => {
           const taskA = tasksMap.get(a);
           const taskB = tasksMap.get(b);
@@ -131,6 +123,27 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     });
   };
 
+  // filter task takes in the filter criteria and returns the filteredOrder based on it
+  const filterTask = (criteria: "completion_status" | null) => {
+    setTaskOrder((prevOrder) => {
+      let filterOrder = [...prevOrder];
+
+      // Filters task based on completion
+      if (criteria === "completion_status") {
+        filterOrder = filterOrder.filter((a) => {
+          const taskA = tasksMap.get(a);
+
+          return taskA ? taskA.isCompleted : false;
+        });
+      } else if (criteria === "null") {
+        // Nothing to be filtered return the original order
+        return filterOrder;
+      }
+
+      return filterOrder;
+    });
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -141,6 +154,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
         removeTask,
         completeTask,
         sortTask,
+        filterTask,
         selectTask,
         clearSelectedSet,
       }}

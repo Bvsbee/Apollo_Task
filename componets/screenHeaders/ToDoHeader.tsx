@@ -9,7 +9,7 @@ import { useTaskContext } from "../../context/TaskProvider";
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
-  const { sortTask } = useTaskContext();
+  const { sortTask, filterTask } = useTaskContext();
   //First DropDown
   const [firstDropDownVisible, setFirstDropDownVisible] = useState(false);
   const [firstDropDownValue, setFirstDropDownValue] = useState(null);
@@ -94,8 +94,8 @@ export default function ToDoHeader() {
               <TouchableOpacity
                 activeOpacity={0.1}
                 onPress={() => {
-                  sortTask(firstDropDownValue, secondDropdownValue),
-                    toggleModal();
+                  sortTask(firstDropDownValue), filterTask(secondDropdownValue);
+                  toggleModal();
                 }}
                 style={{ zIndex: secondDropdownOpen ? 0 : 2001 }}
               >
