@@ -1,25 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  SafeAreaView,
-  Pressable,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import React, { useState, useRef, useCallback } from "react";
-import Task from "../../classes/Task";
-import { LinearGradient } from "expo-linear-gradient";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AddButton from "./AddButton";
-import HandleTaskModal from "../modals/HandleTaskModal";
-import { useActionSheet } from "@expo/react-native-action-sheet";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import EvilIcons from "@expo/vector-icons/EvilIcons";
-import BottomSheet from "@gorhom/bottom-sheet";
-import bottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet";
-import FloatingButton from "../modals/FloatingButton";
 import { useTaskContext } from "../../context/TaskProvider";
-import Fontisto from "@expo/vector-icons/Fontisto";
 
 export default function TaskDisplay({
   buttonActive,
@@ -27,8 +9,7 @@ export default function TaskDisplay({
   buttonActive: boolean;
 }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const { taskOrder, tasksMap, selectedTaskSet, selectTask, completeTask } =
-    useTaskContext();
+  const { taskOrder, tasksMap, selectedTaskSet, selectTask } = useTaskContext();
 
   const toggleModal = () => {
     setModalVisible(!modalVisible);
@@ -171,10 +152,4 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.05 }],
   },
   displayList: { flex: 1, width: "100%", paddingHorizontal: 10 },
-  radioButton: {
-    flex: 1,
-    position: "absolute",
-    left: "75%",
-    bottom: "5%",
-  },
 });

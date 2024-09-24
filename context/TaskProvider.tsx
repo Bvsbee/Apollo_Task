@@ -57,6 +57,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       return updatedMap;
     });
 
+    // Filter out any task that matches the id that was passed in
     setTaskOrder((prevOrder) => prevOrder.filter((taskID) => taskID! == id));
   };
 

@@ -130,16 +130,6 @@ export default function CreateTaskModal({
                 style={styles.dropDown}
                 dropDownContainerStyle={styles.dropDownContainer}
               />
-              {/* <Picker
-                style={styles.pickerInput}
-                onValueChange={setSelectedValue}
-                selectedValue={selectedValue}
-              >
-                <Picker.Item label="Select a priority.." value={null} />
-                <Picker.Item label="High" value="High" />
-                <Picker.Item label="Medium" value="Medium" />
-                <Picker.Item label="Low" value="Low" />
-              </Picker> */}
             </View>
 
             {/* //Due Date View */}
