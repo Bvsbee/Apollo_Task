@@ -28,7 +28,11 @@ export class CreateTaskDto {
 
   @IsOptional()
   @IsString()
-  desc?: string;
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  isSelected: boolean;
 
   @IsOptional()
   @IsBoolean()
