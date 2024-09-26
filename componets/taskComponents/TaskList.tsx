@@ -1,9 +1,6 @@
-import { View, Text, StyleSheet, Modal, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 import React, { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import Task from "../../classes/Task";
+
 import AddButton from "./AddButton";
 
 import TaskDisplay from "./TaskDisplay";

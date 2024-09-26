@@ -76,7 +76,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     });
   };
 
-  // Marks a task selected while a task is selected it is added to of id's that are also selected
+  // Marks a task selected while a task is selected it is added to set id's that are also selected
   const selectTask = (id: number) => {
     setSelectedSet((prevSelectedSet) => {
       const updatedSelectedSet = new Set(prevSelectedSet);
