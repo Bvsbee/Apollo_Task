@@ -22,10 +22,15 @@ export default function AddButton({
 
   //Functions or data structures via Task Global Context
   const {
+    // A map that stores all task that are created. 
     tasksMap,
+    // A set that stores task that users select via tapping,
     selectedTaskSet,
+    // Function that marks all task complete within the selectedTaskSet
     completeTask,
+    // Function that removes all task within the selectedTaskSet 
     removeTask,
+    //Clears the set 
     clearSelectedSet,
   } = useTaskContext();
 
@@ -40,7 +45,9 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
-    // Displays the "Mark Task Complete" button in the middle at position 2. When pressed it will mark all the task that are currently selected within the selectedTaskSet provided from the global task context complete. The button can also be used to mark the task incomplete.
+     /* Displays the "Mark Task Complete" button in the middle at position 2.
+      When pressed it will mark all the task that are currently selected within the selectedTaskSet provided from the global task context complete. 
+      The button can also be used to mark the task incomplete. */
     {
       text: "Mark Task Complete",
       icon: <Ionicons name="checkmark-outline" size={24} color={"#fff"} />,
@@ -49,7 +56,8 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
-    // Displays the "Remove Task" button at the top of the action button at position. When pressed it will remove all the task that are currently selected within the selectedTaskSet provided from globalContext
+    /* Displays the "Remove Task" button at the top of the action button at position. 
+    When pressed it will remove all the task that are currently selected within the selectedTaskSet provided from globalContext */
     {
       text: "Remove Task",
       icon: <Ionicons name="trash-outline" size={24} color={"#fff"} />,
@@ -60,7 +68,8 @@ export default function AddButton({
   ];
   return (
     <View style={styles.container}>
-      {/* If the size of the map containing tasks is empty it will conditionally render a button in the center of the screen that will allow task to be created */}
+      {/* If the size of the map containing tasks is empty, 
+      it will conditionally render a button in the center of the screen that will allow task to be created */}
       {tasksMap.size === 0 ? (
         <View style={styles.placeHolderView}>
           <TouchableOpacity
@@ -80,7 +89,9 @@ export default function AddButton({
           </TouchableOpacity>
         </View>
       ) : (
-        // Once tasks are present within the taskMap it will render the action button in the bottom right corner, allowing users to create task, mark task complete, and remove them as well.
+        /* Once tasks are present within the taskMap it will render the action button in the bottom right corner, 
+        allowing users to create task, mark task complete, and remove them as well. */
+        
 
         <FloatingAction
           position="right"
@@ -101,12 +112,15 @@ export default function AddButton({
               selectedTaskSet.forEach((id) => {
                 removeTask(id);
               });
+              clearSelectedSet();
             } else if (name === "mark_task") {
               setSelectedAction("mark_task");
 
               selectedTaskSet.forEach((id) => {
                 completeTask(id);
               });
+
+              clearSelectedSet();
             }
           }}
         />
