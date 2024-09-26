@@ -58,7 +58,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     });
 
     // Filter out any task that matches the id that was passed in
-    setTaskOrder((prevOrder) => prevOrder.filter((taskID) => taskID! == id));
+    setTaskOrder((prevOrder) => prevOrder.filter((taskID) => taskID! !== id));
   };
 
   // Pass in a set of id's mark them complete or incomplete if selected.
