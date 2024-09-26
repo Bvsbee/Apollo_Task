@@ -28,8 +28,7 @@ export default function TaskDisplay({
             styles.taskItem,
             {
               borderEndColor: task.isCompleted ? "#228B22" : "#DC143C",
-              borderColor:
-                isSelected && task.isCompleted ? "#228B22" : "#DC143C",
+              borderColor: task.isCompleted ? "#228B22" : "#DC143C",
             },
             isSelected && styles.selectedTask,
           ]} /* Forest Green ? Crimson Red. Conditionally Rendering*/
