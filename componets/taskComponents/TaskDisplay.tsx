@@ -32,7 +32,7 @@ export default function TaskDisplay({
                 isSelected && task.isCompleted ? "#228B22" : "#DC143C",
             },
             isSelected && styles.selectedTask,
-          ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
+          ]} /* Forest Green ? Crimson Red. Conditionally Rendering*/
         >
           <View>
             <Text style={styles.taskText}>Task Name: {task.name}</Text>

@@ -9,6 +9,8 @@ import CreateTaskModal from "../modals/CreateTaskModal";
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
 export default function TaskList() {
+
+  // Controls the state of the setting the add buton mod
   const [modalVisible, setModalVisible] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
 

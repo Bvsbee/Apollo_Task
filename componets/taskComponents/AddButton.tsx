@@ -19,6 +19,8 @@ export default function AddButton({
   const [selectedAction, setSelectedAction] = useState<
     "mark_task" | "remove_task" | null
   >(null);
+
+  //Functions or data structures via Task Global Context
   const {
     tasksMap,
     selectedTaskSet,
@@ -27,7 +29,9 @@ export default function AddButton({
     clearSelectedSet,
   } = useTaskContext();
 
+  // Creating the actions that will display within the floating action button at their designated positions.
   const actions = [
+    // Displays the "Create New Task" button at the bottom at position 3. When pressed the create task modal will display
     {
       text: "Create New Task",
       icon: <Ionicons name="create-outline" size={24} color="#fff" />,
@@ -36,6 +40,7 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
+    // Displays the "Mark Task Complete" button in the middle at position 2. When pressed it will mark all the task that are currently selected within the selectedTaskSet provided from the global task context complete. The button can also be used to mark the task incomplete.
     {
       text: "Mark Task Complete",
       icon: <Ionicons name="checkmark-outline" size={24} color={"#fff"} />,
@@ -43,6 +48,8 @@ export default function AddButton({
       position: 2,
       color: "#4a90e2",
     },
+
+    // Displays the "Remove Task" button at the top of the action button at position. When pressed it will remove all the task that are currently selected within the selectedTaskSet provided from globalContext
     {
       text: "Remove Task",
       icon: <Ionicons name="trash-outline" size={24} color={"#fff"} />,
@@ -53,6 +60,7 @@ export default function AddButton({
   ];
   return (
     <View style={styles.container}>
+      {/* If the size of the map containing tasks is empty it will conditionally render a button in the center of the screen that will allow task to be created */}
       {tasksMap.size === 0 ? (
         <View style={styles.placeHolderView}>
           <TouchableOpacity
@@ -72,6 +80,8 @@ export default function AddButton({
           </TouchableOpacity>
         </View>
       ) : (
+        // Once tasks are present within the taskMap it will render the action button in the bottom right corner, allowing users to create task, mark task complete, and remove them as well.
+
         <FloatingAction
           position="right"
           actions={actions}
