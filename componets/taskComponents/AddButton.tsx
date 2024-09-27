@@ -111,15 +111,12 @@ export default function AddButton({
               selectedTaskSet.forEach((id) => {
                 removeTask(id);
               });
-              clearSelectedSet();
             } else if (name === "mark_task") {
               setSelectedAction("mark_task");
 
               selectedTaskSet.forEach((id) => {
                 completeTask(id);
               });
-
-              clearSelectedSet();
             }
           }}
         />
