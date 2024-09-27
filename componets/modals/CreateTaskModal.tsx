@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import React, { useContext } from "react";
 import { useState } from "react";
 import { BlurView } from "expo-blur";
 import { TextInput } from "react-native-gesture-handler";
@@ -18,11 +17,11 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useTaskContext } from "../../context/TaskProvider";
 
 export default function CreateTaskModal({
-  modalVisible,
-  toggleModal,
+  taskModalVisible,
+  toggleCreateTaskModal,
 }: {
-  modalVisible: boolean;
-  toggleModal: () => void;
+  taskModalVisible: boolean;
+  toggleCreateTaskModal: () => void;
 }) {
   const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState("");
@@ -88,13 +87,13 @@ export default function CreateTaskModal({
     setSelectedDate("");
     setDescription("");
 
-    toggleModal();
+    toggleCreateTaskModal();
 
     addTask(newTask);
   };
 
   return (
-    <Modal visible={modalVisible} transparent={true} animationType="slide">
+    <Modal visible={taskModalVisible} transparent={true} animationType="slide">
       <BlurView
         intensity={50}
         blurReductionFactor={4}
@@ -189,7 +188,7 @@ export default function CreateTaskModal({
             name="close"
             style={styles.closeButton}
             size={26}
-            onPress={toggleModal}
+            onPress={toggleCreateTaskModal}
           />
 
           {/* //Create Task Button View */}

@@ -4,9 +4,9 @@ import Navbar from "./Navbar";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Component from "react-native-paper/lib/typescript/components/Typography/Text";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CustomizedHeader from "./drawerComponents/CustomizedHeader";
+import CustomizedHeader from "../drawerComponents/CustomizedHeader";
 
-import { SettingsScreen } from "../screens/SettingsScreens";
+import { SettingsScreen } from "../../screens/SettingsScreens";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const NativeStack = createNativeStackNavigator();

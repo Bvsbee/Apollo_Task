@@ -10,7 +10,7 @@ import {
   ApolloScreen,
   ToDoScreen,
   CalenderScreen,
-} from "../screens/TabScreens";
+} from "../../screens/TabScreens";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import Task from "../classes/Task";
+import { sortingEnum } from "../enums/SortingEnum";
 
 //Defining the idea of the task interface
 interface TaskContextInterface {
@@ -13,7 +14,7 @@ interface TaskContextInterface {
   completeTask: (id: number) => void;
   selectTask: (id: number) => void;
   clearSelectedSet: () => void;
-  sortTask: (criteria: "name" | "priority" | "dueDate" | "none" | null) => void;
+  sortTask: (criteria: sortingEnum) => void;
   filterTask: (criteria: "completion_status" | "none" | null) => void;
 }
 
@@ -68,7 +69,6 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       const task = updatedMap.get(id);
 
       if (task) {
-        task.isCompleted = !task.isCompleted;
         updatedMap.set(id, task);
       }
 

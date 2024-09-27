@@ -8,11 +8,11 @@ import { FloatingAction } from "react-native-floating-action";
 import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
-  toggleModal,
+  toggleTaskModal,
   markButtonActive,
   buttonActive,
 }: {
-  toggleModal: () => void;
+  toggleTaskModal: () => void;
   markButtonActive: () => void;
   buttonActive: boolean;
 }) {
@@ -22,15 +22,15 @@ export default function AddButton({
 
   //Functions or data structures via Task Global Context
   const {
-    // A map that stores all task that are created. 
+    // A map that stores all task that are created.
     tasksMap,
     // A set that stores task that users select via tapping,
     selectedTaskSet,
     // Function that marks all task complete within the selectedTaskSet
     completeTask,
-    // Function that removes all task within the selectedTaskSet 
+    // Function that removes all task within the selectedTaskSet
     removeTask,
-    //Clears the set 
+    //Clears the set
     clearSelectedSet,
   } = useTaskContext();
 
@@ -45,7 +45,7 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
-     /* Displays the "Mark Task Complete" button in the middle at position 2.
+    /* Displays the "Mark Task Complete" button in the middle at position 2.
       When pressed it will mark all the task that are currently selected within the selectedTaskSet provided from the global task context complete. 
       The button can also be used to mark the task incomplete. */
     {
@@ -75,7 +75,7 @@ export default function AddButton({
           <TouchableOpacity
             activeOpacity={0.8}
             accessible={true}
-            onPress={toggleModal}
+            onPress={toggleTaskModal}
             accessibilityLabel="Create a new task"
           >
             <LinearGradient
@@ -91,7 +91,6 @@ export default function AddButton({
       ) : (
         /* Once tasks are present within the taskMap it will render the action button in the bottom right corner, 
         allowing users to create task, mark task complete, and remove them as well. */
-        
 
         <FloatingAction
           position="right"
@@ -105,7 +104,7 @@ export default function AddButton({
           }}
           onPressItem={(name) => {
             if (name === "create_task") {
-              toggleModal();
+              toggleTaskModal();
             } else if (name === "remove_task") {
               setSelectedAction("remove_task");
 

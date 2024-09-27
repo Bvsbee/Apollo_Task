@@ -9,23 +9,22 @@ import CreateTaskModal from "../modals/CreateTaskModal";
 //What does a Task consist of? Priority, Name, Due by, Desc,due date, notes?
 
 export default function TaskList() {
-
   // Controls the state of the setting the add buton mod
-  const [modalVisible, setModalVisible] = useState(false);
+  const [taskModalVisible, setTaskModalVisible] = useState(false);
   const [buttonActive, setButtonActive] = useState(false);
 
   const markButtonActive = () => {
     setButtonActive(!buttonActive);
   };
 
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
+  const toggleTaskModal = () => {
+    setTaskModalVisible(!taskModalVisible);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <AddButton
-        toggleModal={toggleModal}
+        toggleTaskModal={toggleTaskModal}
         markButtonActive={markButtonActive}
         buttonActive={buttonActive}
       />
@@ -34,7 +33,10 @@ export default function TaskList() {
         <TaskDisplay buttonActive={buttonActive} />
       </View>
 
-      <CreateTaskModal modalVisible={modalVisible} toggleModal={toggleModal} />
+      <CreateTaskModal
+        taskModalVisible={taskModalVisible}
+        toggleCreateTaskModal={toggleTaskModal}
+      />
     </SafeAreaView>
   );
 }
