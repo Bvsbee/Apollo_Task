@@ -8,11 +8,11 @@ import { FloatingAction } from "react-native-floating-action";
 import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
-  toggleTaskModal,
+  toggleCreateTaskModal,
   markButtonActive,
   buttonActive,
 }: {
-  toggleTaskModal: () => void;
+  toggleCreateTaskModal: () => void;
   markButtonActive: () => void;
   buttonActive: boolean;
 }) {
