@@ -1,11 +1,14 @@
-import { View, Text, SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import React from "react";
-import TaskList from "../../componets/taskComponents/TaskList";
+import TaskManager from "../../componets/taskComponents/TaskManager";
+
+// Screen responsible for displaying everything task related.
+//Task Manager stores all the features of the screen
 
 export default function ToDoScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <TaskList />
+      <TaskManager />
     </SafeAreaView>
   );
 }
