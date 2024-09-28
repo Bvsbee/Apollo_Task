@@ -10,7 +10,7 @@ export default function TaskDisplay({
 }) {
   const { taskOrder, tasksMap, selectedTaskSet, selectTask } = useTaskContext();
 
-  const dispalyTask = ({ item }: { item: number }) => {
+  const dispalyTask = ({ item }: { item: string }) => {
     const task = tasksMap.get(item);
     if (!task) return null;
 
