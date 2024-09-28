@@ -28,7 +28,6 @@ export default function CreateTaskModal({
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
-  const [taskID, seTaskID] = useState(0);
 
   const { addTask } = useTaskContext();
 
@@ -54,7 +53,7 @@ export default function CreateTaskModal({
       Alert.alert("Incomplete Field", "Please select a date");
       return false;
     }
-    if (!setValue) {
+    if (!value) {
       Alert.alert("Incomplete Field", "Please select a task priority");
       return false;
     }

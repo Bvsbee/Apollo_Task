@@ -6,6 +6,9 @@ import ToDoHeader from "../screenHeaders/ToDoHeader";
 import ShoppingListScreen from "../../screens/TabScreens/ShoppingListScreen";
 import CreateList from "../shoppingListComponents/CreateList";
 
+// Creates the navigation pathways a drawer naviagtion set up
+
+// Allows for definition for the navigation container and screens for it
 const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigator() {
@@ -19,20 +22,27 @@ export default function DrawerNavigator() {
         },
       }}
     >
+      {/* To Do list screen*/}
       <Drawer.Screen
         name="To-Do List"
         component={ToDoScreen}
         options={({}) => ({
-          headerRight: () => <ToDoHeader />,
+          headerRight: () => <ToDoHeader />, //Custom header for To-Do list screen
         })}
       />
+
+      {/* Settings screen*/}
       <Drawer.Screen name="Settings" component={SettingsScreen} />
+
+      {/*Calender screen*/}
       <Drawer.Screen name="Calender" component={CalenderScreen} />
+
+      {/* Shopping List screen*/}
       <Drawer.Screen
         name="Shopping"
         component={ShoppingListScreen}
         options={({}) => ({
-          headerRight: () => <CreateList />,
+          headerRight: () => <CreateList />, // Custom header for Shopping List screen
         })}
       />
     </Drawer.Navigator>
