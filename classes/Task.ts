@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export default class Task {
   taskID: number;
   name: string;
@@ -28,6 +30,10 @@ export default class Task {
     this.isCompleted = isCompleted;
   }
 
+  getTaskID(): number {
+    return this.taskID;
+  }
+
   getName(): string {
     return this.name;
   }
@@ -46,6 +52,10 @@ export default class Task {
 
   getNote(): string {
     return this.note;
+  }
+
+  setTaskID(id: number): void {
+    this.taskID = id;
   }
 
   setName(name: string): void {
