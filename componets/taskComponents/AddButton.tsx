@@ -2,9 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { FloatingAction } from "react-native-floating-action";
-
 import { useTaskContext } from "../../context/TaskProvider";
 
 export default function AddButton({
@@ -63,7 +61,7 @@ export default function AddButton({
     },
   ];
   return (
-    <View style={[styles.container, { zIndex: buttonActive ? 1000 : 3000 }]}>
+    <View style={[styles.container]}>
       {/* If the size of the map containing tasks is empty, 
       it will conditionally render a button in the center of the screen that will allow task to be created */}
       {tasksMap.size === 0 ? (
@@ -71,7 +69,7 @@ export default function AddButton({
           <TouchableOpacity
             activeOpacity={0.8}
             accessible={true}
-            onPress={toggleTaskModal}
+            onPress={toggleCreateTaskModal}
             accessibilityLabel="Create a new task"
           >
             <LinearGradient
@@ -100,7 +98,7 @@ export default function AddButton({
           }}
           onPressItem={(name) => {
             if (name === "create_task") {
-              toggleTaskModal();
+              toggleCreateTaskModal();
             } else if (name === "remove_task") {
               selectedTaskSet.forEach((id) => {
                 removeTask(id);
