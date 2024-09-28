@@ -8,12 +8,7 @@ export default function TaskDisplay({
 }: {
   buttonActive: boolean;
 }) {
-  const [modalVisible, setModalVisible] = useState(false);
   const { taskOrder, tasksMap, selectedTaskSet, selectTask } = useTaskContext();
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
 
   const dispalyTask = ({ item }: { item: number }) => {
     const task = tasksMap.get(item);

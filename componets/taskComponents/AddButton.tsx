@@ -16,10 +16,6 @@ export default function AddButton({
   markButtonActive: () => void;
   buttonActive: boolean;
 }) {
-  const [selectedAction, setSelectedAction] = useState<
-    "mark_task" | "remove_task" | null
-  >(null);
-
   //Functions or data structures via Task Global Context
   const {
     // A map that stores all task that are created.
@@ -67,7 +63,7 @@ export default function AddButton({
     },
   ];
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { zIndex: buttonActive ? 1000 : 3000 }]}>
       {/* If the size of the map containing tasks is empty, 
       it will conditionally render a button in the center of the screen that will allow task to be created */}
       {tasksMap.size === 0 ? (
@@ -106,14 +102,11 @@ export default function AddButton({
             if (name === "create_task") {
               toggleTaskModal();
             } else if (name === "remove_task") {
-              setSelectedAction("remove_task");
-
               selectedTaskSet.forEach((id) => {
                 removeTask(id);
               });
+              markButtonActive();
             } else if (name === "mark_task") {
-              setSelectedAction("mark_task");
-
               selectedTaskSet.forEach((id) => {
                 completeTask(id);
               });

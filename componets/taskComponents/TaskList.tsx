@@ -1,8 +1,6 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import React, { useState } from "react";
-
 import AddButton from "./AddButton";
-
 import TaskDisplay from "./TaskDisplay";
 import CreateTaskModal from "../modals/CreateTaskModal";
 
@@ -26,7 +24,6 @@ export default function TaskList() {
       <AddButton
         toggleTaskModal={toggleTaskModal}
         markButtonActive={markButtonActive}
-        buttonActive={buttonActive}
       />
 
       <View style={styles.displayList}>
