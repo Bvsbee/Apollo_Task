@@ -2,17 +2,17 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 import Task from "../classes/Task";
 import { sortingEnum } from "../enums/SortingEnum";
 
-//Defining the idea of the task interface
+//Defining the shape of the task interface
 interface TaskContextInterface {
   // Structures to store task
-  tasksMap: Map<number, Task>;
-  taskOrder: number[];
-  selectedTaskSet: Set<number>;
+  tasksMap: Map<string, Task>;
+  taskOrder: string[];
+  selectedTaskSet: Set<string>;
   // Functions to handle various operations of Task
   addTask: (task: Task) => void;
-  removeTask: (id: number) => void;
-  completeTask: (id: number) => void;
-  selectTask: (id: number) => void;
+  removeTask: (id: string) => void;
+  completeTask: (id: string) => void;
+  selectTask: (id: string) => void;
   clearSelectedSet: () => void;
   sortTask: (criteria: sortingEnum) => void;
   filterTask: (criteria: "completion_status" | "none" | null) => void;
@@ -27,13 +27,13 @@ interface TaskProviderProps {
 
 export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   // Map to store tasks for searching
-  const [tasksMap, setTasksMap] = useState<Map<number, Task>>(new Map());
+  const [tasksMap, setTasksMap] = useState<Map<string, Task>>(new Map());
 
   // Array to store taskID's to render in proper order
-  const [taskOrder, setTaskOrder] = useState<number[]>([]);
+  const [taskOrder, setTaskOrder] = useState<string[]>([]);
 
   // Set to store selected task
-  const [selectedTaskSet, setSelectedSet] = useState<Set<number>>(new Set());
+  const [selectedTaskSet, setSelectedSet] = useState<Set<string>>(new Set());
 
   // Function adding a new task upon Creation
   const addTask = (task: Task) => {
@@ -48,8 +48,8 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
     setTaskOrder((prevOrder) => [...prevOrder, task.taskID]);
   };
 
-  // Function to remove a task based on the id number
-  const removeTask = (id: number) => {
+  // Function to remove a task
+  const removeTask = (id: string) => {
     setTasksMap((prevMap) => {
       const updatedMap = new Map(prevMap);
 
@@ -63,14 +63,12 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   };
 
   // Pass in a set of id's mark them complete or incomplete if selected.
-  const completeTask = (id: number) => {
+  const completeTask = (id: string) => {
     setTasksMap((prevMap) => {
       const updatedMap = new Map(prevMap);
       const task = updatedMap.get(id);
 
       if (task) {
-        task.isCompleted = !task.isCompleted;
-
         updatedMap.set(id, task);
       }
 
@@ -79,7 +77,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   };
 
   // Marks a task selected while a task is selected it is added to set id's that are also selected
-  const selectTask = (id: number) => {
+  const selectTask = (id: string) => {
     setSelectedSet((prevSelectedSet) => {
       const updatedSelectedSet = new Set(prevSelectedSet);
 
