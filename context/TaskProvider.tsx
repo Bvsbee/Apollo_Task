@@ -69,6 +69,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       const task = updatedMap.get(id);
 
       if (task) {
+        task.isCompleted = !task.isCompleted;
         updatedMap.set(id, task);
       }
 
