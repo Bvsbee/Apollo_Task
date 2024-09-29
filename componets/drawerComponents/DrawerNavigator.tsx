@@ -6,7 +6,7 @@ import ToDoHeader from "../screenHeaders/ToDoHeader";
 import ShoppingListScreen from "../../screens/TabScreens/ShoppingListScreen";
 import CreateList from "../shoppingListComponents/CreateList";
 
-// Creates the navigation pathways a drawer naviagtion set up
+// Creates the navigation pathways a drawer navigation set up
 
 // Allows for definition for the navigation container and screens for it
 const Drawer = createDrawerNavigator();
