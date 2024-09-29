@@ -23,6 +23,7 @@ export default class Task {
   isCompleted: boolean;
 
   constructor(
+    taskID: string,
     name: string,
     priority: string,
     dueDate: string,
