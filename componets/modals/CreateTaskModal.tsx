@@ -16,6 +16,8 @@ import { Ionicons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useTaskContext } from "../../context/TaskProvider";
 
+// Responsible for creating a modal where users can input task details.
+
 export default function CreateTaskModal({
   taskModalVisible,
   toggleCreateTaskModal,
@@ -23,14 +25,26 @@ export default function CreateTaskModal({
   taskModalVisible: boolean;
   toggleCreateTaskModal: () => void;
 }) {
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState("");
+  // State to control calendar visibility
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
 
+  // Initial state to reset input fields
+  const initialTaskState = {
+    taskID: "",
+    taskName: "",
+    dueDate: "",
+    desc: "",
+    isSelected: false,
+    isCompleted: false,
+  };
+
+  // Takes the initial states and will be used to set the states from user input
+  const [taskShape, setTaskShape] = useState(initialTaskState);
+
+  // Add
   const { addTask } = useTaskContext();
 
+  // Priority dropdown setup
   const [menuVisible, setMenuVisible] = useState(false);
   const [value, setValue] = useState<string | null>(null);
   const [items, setItems] = useState([
@@ -39,17 +53,20 @@ export default function CreateTaskModal({
     { label: "Low", value: "Low" },
   ]);
 
+  // Handle date selection from calendar
   const onDayPress = (day: any) => {
-    setSelectedDate(day.dateString);
+    setTaskShape({ ...taskShape, dueDate: day.dateString });
     setCalendarModalVisible(false);
   };
 
+  // Toggles calendar visibility.
   const toggleCalendar = () => {
     setCalendarModalVisible(true);
   };
 
+  // Error handling for required fields
   const errorHandling = () => {
-    if (!selectedDate) {
+    if (!taskShape.dueDate) {
       Alert.alert("Incomplete Field", "Please select a date");
       return false;
     }
@@ -57,7 +74,7 @@ export default function CreateTaskModal({
       Alert.alert("Incomplete Field", "Please select a task priority");
       return false;
     }
-    if (!taskName) {
+    if (!taskShape.taskName) {
       Alert.alert("Incomplete Field", "Please enter a task name");
       return false;
     }
@@ -65,26 +82,16 @@ export default function CreateTaskModal({
     return true;
   };
 
+  // Create a new task. If no error was given
   const createTask = () => {
     if (!errorHandling()) return;
 
-    const newTaskID = Date.now();
+    const { taskName, desc, dueDate } = taskShape;
 
-    const newTask = new Task(
-      newTaskID,
-      taskName,
-      value!,
-      selectedDate,
-      description,
-      "",
-      false,
-      false
-    );
+    const newTask = new Task("", taskName, value!, dueDate, desc, false, false);
 
-    setTaskName("");
+    setTaskShape(initialTaskState);
     setValue(null);
-    setSelectedDate("");
-    setDescription("");
 
     toggleCreateTaskModal();
 
@@ -109,8 +116,10 @@ export default function CreateTaskModal({
               <TextInput
                 placeholder="Enter Task Name"
                 style={styles.textInput}
-                value={taskName}
-                onChangeText={setTaskName}
+                value={taskShape.taskName}
+                onChangeText={(text) =>
+                  setTaskShape({ ...taskShape, taskName: text })
+                }
               ></TextInput>
             </View>
 
@@ -136,7 +145,7 @@ export default function CreateTaskModal({
               <TouchableOpacity onPress={toggleCalendar}>
                 <TextInput
                   style={styles.dueDateTextInput}
-                  value={selectedDate}
+                  value={taskShape.dueDate}
                   placeholder="Choose Due-Date"
                   editable={false}
                 ></TextInput>
@@ -154,7 +163,7 @@ export default function CreateTaskModal({
                   <Calendar
                     onDayPress={onDayPress}
                     markedDates={{
-                      [selectedDate]: {
+                      [taskShape.dueDate]: {
                         selected: true,
                         marked: true,
                         selectedColor: "#00adf5",
@@ -175,9 +184,11 @@ export default function CreateTaskModal({
               <Text style={styles.label}>Description: </Text>
               <TextInput
                 style={styles.descriptionInput}
-                value={description}
+                value={taskShape.desc}
                 placeholder="Enter A Description"
-                onChangeText={setDescription}
+                onChangeText={(text) =>
+                  setTaskShape({ ...taskShape, desc: text })
+                }
               ></TextInput>
             </View>
           </View>
@@ -197,10 +208,7 @@ export default function CreateTaskModal({
             end={{ x: 1, y: 1 }}
             style={styles.gradientView}
           >
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPressIn={() => createTask()}
-            >
+            <TouchableOpacity activeOpacity={0.8} onPress={() => createTask()}>
               <Text style={styles.createTaskButtonText}>Create Task!</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -218,6 +226,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
   },
   calendarModalContainer: {
     flex: 1,
