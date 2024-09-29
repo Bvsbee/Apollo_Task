@@ -37,11 +37,9 @@ export default function TaskDisplay({
           <View>
             <Text style={styles.taskText}>Due: {task.dueDate}</Text>
           </View>
-          {task.description && (
+          {task.desc && (
             <View>
-              <Text style={styles.taskText}>
-                Description: {task.description}
-              </Text>
+              <Text style={styles.taskText}>Description: {task.desc}</Text>
             </View>
           )}
         </View>
@@ -63,9 +61,9 @@ export default function TaskDisplay({
           <Text style={styles.taskText}>Due: {task.dueDate}</Text>
         </View>
 
-        {task.description && (
+        {task.desc && (
           <View>
-            <Text style={styles.taskText}>Description: {task.description}</Text>
+            <Text style={styles.taskText}>Description: {task.desc}</Text>
           </View>
         )}
       </View>
