@@ -1,36 +1,48 @@
-import { v4 as uuidv4 } from "uuid";
+import uuid from "react-native-uuid";
+import { PriorityEnum } from "../enums/PriorityEnum";
 
+// Task class responsible for defining a task.
 export default class Task {
-  taskID: number;
+  taskID: string;
+  //Act's as the name/title for the task
   name: string;
+
+  //Task priority's (High, Medium, Low)
   priority: string;
+
+  // Due date for the task
   dueDate: string;
-  description: string;
-  note: string;
+
+  // Optional  description for the task
+  desc: string;
+
+  // Status for if the task is currently selected
   isSelected: boolean;
+
+  // Status for if the task is currently completed or not.
   isCompleted: boolean;
 
   constructor(
-    taskID: number,
     name: string,
     priority: string,
     dueDate: string,
-    description: string,
-    note: string,
+    desc: string,
     isSelected: boolean,
     isCompleted: boolean
   ) {
-    this.taskID = taskID;
+    // Allow's for unique task id's
+    this.taskID = String(uuid.v4());
     this.name = name;
     this.priority = priority;
     this.dueDate = dueDate;
-    this.description = description;
-    this.note = note;
+    this.desc = desc;
     this.isSelected = isSelected;
     this.isCompleted = isCompleted;
   }
 
-  getTaskID(): number {
+  //Getters and setter's for each task property
+
+  getTaskID(): string {
     return this.taskID;
   }
 
@@ -47,31 +59,19 @@ export default class Task {
   }
 
   getDescription(): string {
-    return this.description;
-  }
-
-  getNote(): string {
-    return this.note;
-  }
-
-  setTaskID(id: number): void {
-    this.taskID = id;
+    return this.desc;
   }
 
   setName(name: string): void {
     this.name = name;
   }
 
-  setPriority(priority: string): void {
+  setPriority(priority: PriorityEnum): void {
     this.priority = priority;
   }
 
-  setDescription(description: string): void {
-    this.description = this.description;
-  }
-
-  setNote(note: string): void {
-    this.note = note;
+  setDescription(desc: string): void {
+    this.desc = this.desc;
   }
 
   taskSelected(): boolean {
