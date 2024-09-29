@@ -14,23 +14,17 @@ export default function AddButton({
   markButtonActive: () => void;
   buttonActive: boolean;
 }) {
-  //Functions or data structures via Task Global Context
+  // Global task context used for task management operations or storage
   const {
-    // A map that stores all task that are created.
     tasksMap,
-    // A set that stores task that users select via tapping,
     selectedTaskSet,
-    // Function that marks all task complete within the selectedTaskSet
     completeTask,
-    // Function that removes all task within the selectedTaskSet
     removeTask,
-    //Clears the set
     clearSelectedSet,
   } = useTaskContext();
 
-  // Creating the actions that will display within the floating action button at their designated positions.
+  // Floating action button options
   const actions = [
-    // Displays the "Create New Task" button at the bottom at position 3. When pressed the create task modal will display
     {
       text: "Create New Task",
       icon: <Ionicons name="create-outline" size={24} color="#fff" />,
@@ -39,9 +33,6 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
-    /* Displays the "Mark Task Complete" button in the middle at position 2.
-      When pressed it will mark all the task that are currently selected within the selectedTaskSet provided from the global task context complete. 
-      The button can also be used to mark the task incomplete. */
     {
       text: "Mark Task Complete",
       icon: <Ionicons name="checkmark-outline" size={24} color={"#fff"} />,
@@ -50,8 +41,6 @@ export default function AddButton({
       color: "#4a90e2",
     },
 
-    /* Displays the "Remove Task" button at the top of the action button at position. 
-    When pressed it will remove all the task that are currently selected within the selectedTaskSet provided from globalContext */
     {
       text: "Remove Task",
       icon: <Ionicons name="trash-outline" size={24} color={"#fff"} />,
