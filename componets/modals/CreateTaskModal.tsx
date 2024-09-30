@@ -41,7 +41,7 @@ export default function CreateTaskModal({
   // Takes the initial states and will be used to set the states from user input
   const [taskShape, setTaskShape] = useState(initialTaskState);
 
-  // Add
+  // Access Task management context for operations and state
   const { addTask } = useTaskContext();
 
   // Priority dropdown setup
