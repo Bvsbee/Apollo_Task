@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import React, { useState, useRef, useCallback } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useTaskContext } from "../../context/TaskProvider";
 
@@ -8,25 +7,34 @@ export default function TaskDisplay({
 }: {
   buttonActive: boolean;
 }) {
+  
+   // Access Task management context for operations and state
   const { taskOrder, tasksMap, selectedTaskSet, selectTask } = useTaskContext();
 
-  const dispalyTask = ({ item }: { item: string }) => {
+
+  // Defines how each task will display 
+  const displayTask = ({ item }: { item: string }) => {
+
+   
     const task = tasksMap.get(item);
     if (!task) return null;
-
+    
+   
     const isSelected = selectedTaskSet.has(item);
-
+    
+    //If Active it will conditional render the ability to select a task
     return buttonActive ? (
+      // Conditionally renders a selectable task view 
       <TouchableOpacity activeOpacity={0.8} onPress={() => selectTask(item)}>
         <View
           style={[
             styles.taskItem,
-            {
+            { //Makes border color red or green based off completion 
               borderEndColor: task.isCompleted ? "#228B22" : "#DC143C",
               borderColor: task.isCompleted ? "#228B22" : "#DC143C",
             },
             isSelected && styles.selectedTask,
-          ]} /* Forest Green ? Crimson Red. Conditionally Rendering*/
+          ]} 
         >
           <View>
             <Text style={styles.taskText}>Task Name: {task.name}</Text>
@@ -45,11 +53,13 @@ export default function TaskDisplay({
         </View>
       </TouchableOpacity>
     ) : (
+
+      //Non selectable task view 
       <View
         style={[
           styles.taskItem,
           { borderEndColor: task.isCompleted ? "#228B22" : "#DC143C" },
-        ]} /* Forest Green ? Crimson Red. Conditonally Rendering*/
+        ]} /* Forest Green ? Crimson Red. Conditionally Rendering*/
       >
         <View>
           <Text style={styles.taskText}>Task Name: {task.name}</Text>
@@ -60,7 +70,7 @@ export default function TaskDisplay({
         <View>
           <Text style={styles.taskText}>Due: {task.dueDate}</Text>
         </View>
-
+       
         {task.desc && (
           <View>
             <Text style={styles.taskText}>Description: {task.desc}</Text>
@@ -70,6 +80,7 @@ export default function TaskDisplay({
     );
   };
 
+  // Renders each task
   return (
     <View style={styles.container}>
       {tasksMap.size > 0 && (
@@ -78,8 +89,8 @@ export default function TaskDisplay({
 
           <FlatList
             data={taskOrder}
-            renderItem={dispalyTask}
-            keyExtractor={(item, index) => index.toString()}
+            renderItem={displayTask}
+            keyExtractor={(index) => index.toString()}
           />
         </View>
       )}
