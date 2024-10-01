@@ -14,7 +14,7 @@ interface TaskContextInterface {
   completeTask: (id: string) => void;
   selectTask: (id: string) => void;
   clearSelectedSet: () => void;
-  sortTask: (criteria: sortingEnum) => void;
+  sortTask: (criteria: "name" | "priority" | "dueDate" | "none" | null) => void;
   filterTask: (criteria: "completion_status" | "none" | null) => void;
 }
 

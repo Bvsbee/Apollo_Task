@@ -11,9 +11,9 @@ export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
   const { sortTask, filterTask } = useTaskContext();
   //First DropDown
-  const [firstDropDownVisible, setFirstDropDownVisible] = useState(false);
-  const [firstDropDownValue, setFirstDropDownValue] = useState(null);
-  const [firstDropDownItems, setFirstDropDownItems] = useState([
+  const [sortingDropDownVisible, setSortDropDownVisible] = useState(false);
+  const [sortDropDownValue, setSortDropDownValue] = useState(null);
+  const [sortDropDownItems, setSortDropDownItems] = useState([
     { label: "None", value: "none" },
     { label: "Name", value: "name" },
     { label: "Priority", value: "priority" },
@@ -21,9 +21,9 @@ export default function ToDoHeader() {
   ]);
 
   //Second DropDown
-  const [secondDropdownOpen, setSecondDropdownOpen] = useState(false);
-  const [secondDropdownValue, setSecondDropdownValue] = useState(null);
-  const [secondDropdownItems, setSecondDropdownItems] = useState([
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [filterDropdownValue, setFilterDropdownValue] = useState(null);
+  const [filterDropdownItems, setFilterDropdownItems] = useState([
     { label: "None", value: "none" },
     { label: "Completion Status ", value: "completion_status" },
   ]);
@@ -50,12 +50,12 @@ export default function ToDoHeader() {
 
             <Text style={styles.sectionText}>Sorting</Text>
             <DropDownPicker
-              open={firstDropDownVisible}
-              value={firstDropDownValue}
-              items={firstDropDownItems}
-              setOpen={setFirstDropDownVisible}
-              setValue={setFirstDropDownValue}
-              setItems={setFirstDropDownItems}
+              open={sortingDropDownVisible}
+              value={sortDropDownValue}
+              items={sortDropDownItems}
+              setOpen={setSortDropDownVisible}
+              setValue={setSortDropDownValue}
+              setItems={setSortDropDownItems}
               placeholder="Sort By..."
               style={[styles.dropDownPicker]}
               dropDownContainerStyle={[styles.dropDownContainer]}
@@ -64,20 +64,20 @@ export default function ToDoHeader() {
 
             <Text style={styles.sectionText}>Filtering</Text>
             <DropDownPicker
-              open={secondDropdownOpen}
-              value={secondDropdownValue}
-              items={secondDropdownItems}
-              setOpen={setSecondDropdownOpen}
-              setValue={setSecondDropdownValue}
-              setItems={setSecondDropdownItems}
+              open={filterDropdownOpen}
+              value={filterDropdownValue}
+              items={filterDropdownItems}
+              setOpen={setFilterDropdownOpen}
+              setValue={setFilterDropdownValue}
+              setItems={setFilterDropdownItems}
               placeholder="Filter By..."
               style={[
                 styles.dropDownPicker,
-                { zIndex: firstDropDownVisible ? 2000 : 1000 },
+                { zIndex: sortingDropDownVisible ? 2000 : 1000 },
               ]}
               dropDownContainerStyle={[
                 styles.dropDownContainer,
-                { zIndex: firstDropDownVisible ? 2000 : 1000 },
+                { zIndex: sortingDropDownVisible ? 2000 : 1000 },
               ]}
               placeholderStyle={styles.placeHolder}
             />
@@ -88,16 +88,16 @@ export default function ToDoHeader() {
               end={{ x: 1, y: 1 }}
               style={[
                 styles.gradientView,
-                { marginTop: 30, zIndex: secondDropdownOpen ? 0 : 2001 },
+                { marginTop: 30, zIndex: filterDropdownOpen ? 0 : 2001 },
               ]}
             >
               <TouchableOpacity
                 activeOpacity={0.1}
                 onPress={() => {
-                  sortTask(firstDropDownValue), filterTask(secondDropdownValue);
+                  sortTask(sortDropDownValue), filterTask(filterDropdownValue);
                   toggleModal();
                 }}
-                style={{ zIndex: secondDropdownOpen ? 0 : 2001 }}
+                style={{ zIndex: filterDropdownOpen ? 0 : 2001 }}
               >
                 <Text style={styles.text}>Confirm Action!</Text>
               </TouchableOpacity>
