@@ -14,7 +14,7 @@ export default function AddButton({
   markButtonActive: () => void;
   buttonActive: boolean;
 }) {
-  // Global task context used for task management operations or storage
+  // Access Task management context for operations and state
   const {
     tasksMap,
     selectedTaskSet,
@@ -52,7 +52,7 @@ export default function AddButton({
   return (
     <View style={[styles.container]}>
       {/* If the size of the map containing tasks is empty, 
-      it will conditionally render a button in the center of the screen that will allow task to be created */}
+      render a button in the center of the screen that will allow task to be created */}
       {tasksMap.size === 0 ? (
         <View style={styles.placeHolderView}>
           <TouchableOpacity
@@ -72,8 +72,9 @@ export default function AddButton({
           </TouchableOpacity>
         </View>
       ) : (
-        /* Once tasks are present within the taskMap it will render the action button in the bottom right corner, 
-        allowing users to create task, mark task complete, and remove them as well. */
+        /* Once tasks are present within the taskMap 
+        render the action button in the bottom right corner, 
+         */
 
         <FloatingAction
           position="right"

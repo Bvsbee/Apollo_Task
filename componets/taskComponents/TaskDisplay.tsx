@@ -7,34 +7,30 @@ export default function TaskDisplay({
 }: {
   buttonActive: boolean;
 }) {
-  
-   // Access Task management context for operations and state
+  // Access Task management context for operations and state
   const { taskOrder, tasksMap, selectedTaskSet, selectTask } = useTaskContext();
 
-
-  // Defines how each task will display 
+  // Defines how each task will display
   const displayTask = ({ item }: { item: string }) => {
-
-   
     const task = tasksMap.get(item);
     if (!task) return null;
-    
-   
+
     const isSelected = selectedTaskSet.has(item);
-    
-    //If Active it will conditional render the ability to select a task
+
+    //If Active it will  render the ability to select a task
     return buttonActive ? (
-      // Conditionally renders a selectable task view 
+      // Conditionally renders a selectable task view
       <TouchableOpacity activeOpacity={0.8} onPress={() => selectTask(item)}>
         <View
           style={[
             styles.taskItem,
-            { //Makes border color red or green based off completion 
+            {
+              //Makes border color red or green based off completion
               borderEndColor: task.isCompleted ? "#228B22" : "#DC143C",
               borderColor: task.isCompleted ? "#228B22" : "#DC143C",
             },
             isSelected && styles.selectedTask,
-          ]} 
+          ]}
         >
           <View>
             <Text style={styles.taskText}>Task Name: {task.name}</Text>
@@ -53,8 +49,7 @@ export default function TaskDisplay({
         </View>
       </TouchableOpacity>
     ) : (
-
-      //Non selectable task view 
+      //Non selectable task view
       <View
         style={[
           styles.taskItem,
@@ -70,7 +65,7 @@ export default function TaskDisplay({
         <View>
           <Text style={styles.taskText}>Due: {task.dueDate}</Text>
         </View>
-       
+
         {task.desc && (
           <View>
             <Text style={styles.taskText}>Description: {task.desc}</Text>

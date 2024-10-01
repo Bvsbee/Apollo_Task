@@ -25,7 +25,6 @@ export default function CreateTaskModal({
   taskModalVisible: boolean;
   toggleCreateTaskModal: () => void;
 }) {
-  // State to control calendar visibility
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
 
   // Initial state to reset input fields
@@ -37,8 +36,6 @@ export default function CreateTaskModal({
     isSelected: false,
     isCompleted: false,
   };
-
-  // Takes the initial states and will be used to set the states from user input
   const [taskShape, setTaskShape] = useState(initialTaskState);
 
   // Access Task management context for operations and state
@@ -59,7 +56,6 @@ export default function CreateTaskModal({
     setCalendarModalVisible(false);
   };
 
-  // Toggles calendar visibility.
   const toggleCalendar = () => {
     setCalendarModalVisible(true);
   };

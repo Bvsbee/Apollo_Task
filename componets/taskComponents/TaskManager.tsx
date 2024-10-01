@@ -7,18 +7,15 @@ import CreateTaskModal from "../modals/CreateTaskModal";
 // TaskManager is the  centralized container for the features of the to-do-list screen
 
 export default function TaskManager() {
-  // Controls the state of the setting createTaskModal visible using the add button
   const [taskModalVisible, setTaskModalVisible] = useState(false);
 
   // Marks the floating action button active from add button and communicates it to TaskDisplay
   const [buttonActive, setButtonActive] = useState(false);
 
-  // Toggles state of floating action button
   const markButtonActive = () => {
     setButtonActive(!buttonActive);
   };
 
-  // Toggles state of CreateTaskModal's visibility.
   const toggleCreateTaskModal = () => {
     setTaskModalVisible(!taskModalVisible);
   };

@@ -9,6 +9,8 @@ import { useTaskContext } from "../../context/TaskProvider";
 
 export default function ToDoHeader() {
   const [modalVisible, setModalVisible] = useState(false);
+
+  // Access Task management context for operations and state
   const { sortTask, filterTask } = useTaskContext();
   //First DropDown
   const [sortingDropDownVisible, setSortDropDownVisible] = useState(false);
