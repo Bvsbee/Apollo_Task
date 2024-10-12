@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import Task from "../classes/Task";
-import { sortingEnum } from "../enums/SortingEnum";
+
 
 //Defining the shape of the task interface
 interface TaskContextInterface {

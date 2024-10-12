@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   dueDateTextInput: {
-    width: 206,
+    width: "134%",
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   dropDown: {
-    width: "63%",
+    width: "61%",
     backgroundColor: "#fff",
     left: 10,
     shadowColor: "#000",
@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   dropDownContainer: {
-    width: "63%",
+    width: "61%",
     backgroundColor: "#fff",
     left: 10,
     borderRadius: 10,
