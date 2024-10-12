@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from 'dtos/CreateTaskDto';
 import { TaskEntity } from './TaskEntity';
 import { UpdateTaskDto } from 'dtos/UpdateTaskDto';
+import { GetTaskFilterDto } from 'dtos/getTaskFilterDto';
 
 @Controller('tasks')
 export class TasksController {
@@ -19,6 +21,11 @@ export class TasksController {
   @Post()
   async createTask(@Body() createTaskDto: CreateTaskDto): Promise<TaskEntity> {
     return this.taskService.createTask(createTaskDto);
+  }
+
+  @Get()
+  async getAllTask(getTaskFilterDto: GetTaskFilterDto): Promise<TaskEntity[]> {
+    return this.taskService.getAllTasks(getTaskFilterDto);
   }
 
   @Get('/:id')
