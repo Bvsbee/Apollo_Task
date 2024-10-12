@@ -1,6 +1,7 @@
 import {
   IsBoolean,
   IsDate,
+  IsDateString,
   IsEnum,
   IsNotEmpty,
   IsOptional,
@@ -12,10 +13,6 @@ import { PriorityEnum } from 'task/TaskPriority-enum';
 export class CreateTaskDto {
   @IsString()
   @IsNotEmpty()
-  id: string;
-
-  @IsString()
-  @IsNotEmpty()
   name: string;
 
   @IsEnum(PriorityEnum, { message: 'Priority must be High Medium or Low' })
@@ -23,7 +20,7 @@ export class CreateTaskDto {
 
   @IsString()
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   dueDate: string;
 
   @IsOptional()
@@ -31,7 +28,7 @@ export class CreateTaskDto {
   description?: string;
 
   @IsOptional()
-  @IsString()
+  @IsBoolean()
   isSelected: boolean;
 
   @IsOptional()

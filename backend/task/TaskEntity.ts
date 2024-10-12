@@ -6,7 +6,7 @@ import { PriorityEnum } from './TaskPriority-enum';
 
 @Entity('tasks')
 export class TaskEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()

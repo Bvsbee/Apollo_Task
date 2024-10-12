@@ -3,6 +3,7 @@ import { CreateTaskDto } from 'dtos/CreateTaskDto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskEntity } from './TaskEntity';
 import { Repository } from 'typeorm';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class TasksService {
@@ -12,18 +13,15 @@ export class TasksService {
   ) {}
 
   async createTask(createTaskDto: CreateTaskDto): Promise<TaskEntity> {
-    const {
-      id,
-      name,
-      priority,
-      dueDate,
-      description,
-      isSelected,
-      isCompleted,
-    } = createTaskDto;
+    if (!createTaskDto) {
+      throw new Error('Task data is missing');
+    }
 
+    const { name, priority, dueDate, description, isSelected, isCompleted } =
+      createTaskDto;
+
+    //Create the task
     const task = this.taskRepository.create({
-      id,
       name,
       priority,
       dueDate,
@@ -32,27 +30,25 @@ export class TasksService {
       isCompleted,
     });
 
-    this.taskRepository.save(task);
+    // Have the db save the task created
+    await this.taskRepository.save(task);
 
     return task;
   }
 
   async removeTask(id: string): Promise<void> {
-    await this.taskRepository.delete({id});
+    await this.taskRepository.delete({ id });
   }
 
   async getTaskById(id: string): Promise<TaskEntity> {
     const task = await this.taskRepository.findOneBy({ id });
 
     if (!task) {
-       throw new NotFoundException(`Task with the following ID: ${id} was not found`)
+      throw new NotFoundException(
+        `Task with the following ID: ${id} was not found`,
+      );
     }
 
     return task;
-    
-    }
-
-
-    
   }
-
+}
