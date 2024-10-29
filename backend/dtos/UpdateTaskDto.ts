@@ -3,9 +3,9 @@ import { IsOptional, IsBoolean } from 'class-validator';
 export class UpdateTaskDto {
   @IsOptional()
   @IsBoolean()
-  isSelected: boolean;
+  isCompleted: boolean;
 
   @IsOptional()
   @IsBoolean()
-  isCompleted: boolean;
+  isSelected: boolean;
 }

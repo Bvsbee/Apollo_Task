@@ -3,7 +3,6 @@ import { CreateTaskDto } from 'dtos/CreateTaskDto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskEntity } from './TaskEntity';
 import { Repository } from 'typeorm';
-import { throwError } from 'rxjs';
 import { UpdateTaskDto } from 'dtos/UpdateTaskDto';
 import { GetTaskFilterDto } from 'dtos/getTaskFilterDto';
 
@@ -57,15 +56,12 @@ export class TasksService {
     return await this.taskRepository.save(task);
   }
 
-  
   async getAllTasks(getTaskFilterDto: GetTaskFilterDto): Promise<TaskEntity[]> {
-      
     const query = this.taskRepository.createQueryBuilder('task');
 
     const tasks = await query.getMany();
-    
-    return tasks;
 
+    return tasks;
   }
 
   async getTaskById(id: string): Promise<TaskEntity> {

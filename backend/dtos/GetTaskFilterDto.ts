@@ -1,4 +1,4 @@
 export class GetTaskFilterDto {
-  isCompleted?: boolean;
   search?: string;
+  isCompleted?: boolean;
 }
