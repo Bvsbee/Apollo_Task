@@ -15,6 +15,7 @@ import Task from "../../classes/Task";
 import { Ionicons } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useTaskContext } from "../../context/TaskProvider";
+import TaskService from "../../api/TaskService";
 
 // Responsible for creating a modal where users can input task details.
 
@@ -40,6 +41,7 @@ export default function CreateTaskModal({
 
   // Access Task management context for operations and state
   const { addTask } = useTaskContext();
+  const taskService = new TaskService();
 
   // Priority dropdown setup
   const [menuVisible, setMenuVisible] = useState(false);
@@ -79,7 +81,7 @@ export default function CreateTaskModal({
   };
 
   // Create a new task. If no error was given
-  const createTask = () => {
+  const createTask = async () => {
     if (!errorHandling()) return;
 
     const { taskName, desc, dueDate } = taskShape;
@@ -92,6 +94,12 @@ export default function CreateTaskModal({
     toggleCreateTaskModal();
 
     addTask(newTask);
+
+    try {
+      await taskService.addTask(newTask);
+    } catch (error) {
+      console.error("Error adding Task: ", error);
+    }
   };
 
   return (
