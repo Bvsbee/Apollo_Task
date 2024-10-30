@@ -1,8 +1,15 @@
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import { TextInput } from "react-native-gesture-handler";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Login() {
   return (
@@ -23,6 +30,20 @@ export default function Login() {
             placeholder="Enter Password"
           ></TextInput>
         </View>
+
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          activeOpacity={0.8}
+          accessible={true}
+          accessibilityLabel="Login to your account"
+        >
+          <LinearGradient
+            colors={["#7da8b3", "#4a90e2"]}
+            style={styles.gradient}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -35,9 +56,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f0f0f5",
   },
-  formContainer: {},
-  row: {
-    flexDirection: "row",
+  formContainer: {
+    padding: 20,
+    width: "90%",
+    height: "50%",
+    borderRadius: 10,
+    borderWidth: 1,
+    backgroundColor: "#d8f3ff",
+    shadowColor: "#000", // Add some shadow for a 3D effect
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5, // Shadow for Android
   },
-  textInput: { fontSize: 18 },
+  row: {
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 10,
+  },
+  textInput: {
+    fontSize: 18,
+    marginLeft: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "Black",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    textAlign: "center",
+  },
+  buttonContainer: {},
+  gradient: {
+    padding: 5,
+    borderRadius: 100,
+  },
 });
